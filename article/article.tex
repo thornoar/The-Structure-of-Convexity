@@ -1,0 +1,1001 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{geometry}
+\geometry{left = 2cm, top = 2.5cm, right = 2cm, bottom = 3cm}
+
+\makeatletter
+\let\ps@plain\ps@empty
+\makeatletter
+
+\newcommand{\lib}[1]{\input{../../Libs/LaTeX/#1}}
+
+\newcommand{\C}{\EuScript{C}}
+\newcommand{\E}{\EuScript{E}}
+\newcommand{\Le}{\mathcal{L}}
+
+\newcommand{\btw}{\lessdot}
+\newcommand{\mat}{\odot}
+\newcommand{\ins}{\varpropto}
+\newcommand{\g}{\mathfrak{g}}
+
+\lib{Asymptote/Asymptote}
+\lib{Graphics}
+\lib{Text}
+\lib{Math}
+\lib{Theorem_eng}
+
+\usepackage{tgschola}
+
+\begin{asydef}
+defaultpen(linewidth(.9pt));
+
+picture part;
+
+pair[] a = new pair[7];
+
+a[0] = (-3, 0);
+a[1] = (-1.5, 0);
+a[2] = (-.3, 0);
+a[3] = (1.5, .5);
+a[4] = (3, .5);
+a[5] = (1.5, -.5);
+a[6] = (3, -.5);
+
+pen dotpen = linewidth(4pt);
+pen polytopedotpen = linewidth(5.1pt);
+pen polytopepen = linewidth(1.1pt);
+
+draw(part, a[6]--a[5], arrow = MidArcArrow(SimpleHead));
+draw(part, a[4]--a[3], arrow = MidArcArrow(SimpleHead));
+draw(part, a[1]--a[0], arrow = MidArcArrow(SimpleHead));
+
+for (int i = 0; i < 7; ++i)
+{
+    //dot(part, a[i], dotpen);
+}
+
+label(part, "\(a\)", a[1], 2*S);
+label(part, "\(b\)", a[3], 2*N);
+label(part, "\(c\)", a[5], 2*S);
+
+void drawsegment (pair a, pair b, pen drawpen = currentpen)
+{
+    draw(a--b, drawpen);
+    dot(a, dotpen);
+    dot(b, dotpen);
+}
+\end{asydef}
+
+\newcommand{\varlle}{\lesssim}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\newgeometry{left = 3cm, top = 1cm, right = 3.5cm, bottom = 2.5cm}
+
+\emptysymbol\\[3cm]
+{\Huge \bf Convex structures}\\[2mm]
+{\Huge \bf and their applications}\\[1mm]
+\rule[0.5ex]{\widthof{{\Huge \bf and their applications}} + 1cm}{1.5pt}\\ 
+
+
+
+\begin{wrapfigure}[10]{r}{.5\linewidth}
+\begin{flushleft}
+
+\vspace{8mm}
+
+\begin{asy}
+settings.render = 0;
+// settings.outformat = "png";
+
+size(9cm);
+
+import three;
+import graph3;
+
+path3 myarc = rotate(18, Z) * Arc(c = O, normal = X, v1 = -Z, v2 = Z, n = 10);
+surface backHemisphere = surface(myarc, angle1=0, angle2=180, c=O, axis = Z, n = 10);
+surface frontHemisphere = surface(myarc, angle1 = 180, angle2 = 360, c = O, axis = Z, n = 10);
+draw(backHemisphere, surfacepen = material(white+opacity(0.8), emissivepen=0.1*white), meshpen=gray(0.4));
+draw(frontHemisphere, surfacepen=material(white+opacity(0.8),
+emissivepen=0.1*white), meshpen=gray(0.4));
+
+
+
+\end{asy}
+\end{flushleft}
+\end{wrapfigure}
+
+\emptysymbol
+
+\vspace{2mm}
+
+{
+\large\noindent
+Roman Maksimovich, Belgrade \\
+
+\noindent
+\today
+
+% \noindenttt
+% Supervisor: Arshak Aivasian, Saint-Petersburg State University student \\
+}
+
+\emptysymbol
+
+\vspace{1cm}
+
+\textbf{Keywords}\\[1mm]
+{
+    \itshape
+    
+    Convex space
+
+    Polytope
+
+    Dimension
+
+    Hyperplane
+
+    Partial order
+
+    Metric
+
+    Topology
+
+    Manifold
+
+    Local convexity\\[15mm]
+}
+
+\textbf{Abstract}\\[1mm]
+
+In this paper we research convexity in three ways: (1) we define and study the inner properties and concepts (dimension, polytopes, hyperplanes, etc.) of convex spaces; (2) we explore the qualities of convexities induced by other structures (partial orders, metrics) and develop emerging concepts in the convex context; (3) we derive a topology on convex spaces and examine the generalized notion of local convexity with connection to differential geometry.
+
+\newpage
+
+\restoregeometry
+
+\tableofcontents
+\newpage
+
+\section{Preface}
+
+Convexity is somewhat rarely studied as a separate structure. The concept usualy arises in geometry, linear algebra, functional analysis, or convex analysis. However, convexity as an individual field of study proves to be rich and universal by itself. In this paper we research \textit{convex spaces} from different angles. Here is a summary of the structure and results of our work:
+
+\begin{itemize}
+    \item[\textbf{(1)}] \textbf{Introduction to convexity:} convex space (\ref{def-cs}), polytope (\ref{def-poly}), freedom (\ref{def-free}), dimension (\ref{def-dim}), hyperplane (\ref{def-hyper}), one-point extension (\ref{def-0-dim-ext}).
+
+    \textit{Theorem \ref{ap-th-equivalent}} --- the finite nature of convexity.
+
+    \textit{Propositions \ref{poly-dim} and \ref{set-dim}} --- dimension properties of polytopes and convex sets.
+
+    \textit{Proposition \ref{hyper-1}, theorem \ref{th-hyper-unique}} --- hyperplane features and hyperfamily uniqueness.
+
+    \textit{Lemma \ref{tpul} and theorem \ref{th-tpul}} --- The Polytope Union Lemma and its connection to hyperplanes.
+
+    \item[\textbf{(2)}] \textbf{Order convexity:} order convexity (\ref{def-ord-conv}), \(n\)-affinity (\ref{def-1-affine}, \ref{def-n-affine}).
+    
+    \textit{Theorem \ref{th-ord-free}} --- any order convexity is free.
+
+    \textit{Lemma \ref{order-unique}, theorem \ref{0-1-affine}} --- properties of linear convex spaces and 1-affinity.
+
+    \item[\textbf{(3)}] \textbf{Metric/segmential convexity:} metric convexity (\ref{def-met-conv}), segmential space (\ref{def-segm}), finite-segmential space (\ref{def-segm}), join (\ref{def-join}), uniquely geodesic metric (\ref{def-unigeo}).
+    
+    \textit{Lemma \ref{join-comm}} --- sufficient condition for join-commutativity.
+
+    \textit{Theorem \ref{th-ord-free}} --- sufficient condition for a segmential space to be free.
+
+    \textit{Lemmas \ref{unigeo-1}, \ref{unigeo-2}, \ref{unigeo-3}} --- attributes of uniquely geodesic metric convex spaces.
+
+    \item[\textbf{(4)}] \textbf{Convex geometry:} polytope interior (\ref{def-poly-int}), convex topology (\ref{def-conv-top}).
+\end{itemize}
+
+The author expresses exceptional gratitude to sir Arshar Aivasian, student of the Saint Petersburg State University, for the original idea of the project and fruitful discussions. He would also like to mention the Laboratory for Continuous Mathematical Education, St. Petersburg, where he was taught everything he knows.
+
+\newpage
+
+\section{Introduction to convexity}
+
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+
+\vspace{-2mm}
+
+\begin{asy}
+size(7cm);
+
+path convex = (-1,0)..(0,2)..(1,0)..(0,-1)..cycle;
+path unconvex = (-1,0)..(0,1.5)..(1.5,.7)..(.2,0)..(.8,-.8)..(0,-1)..cycle;
+
+draw(shift(-1,0)*convex);
+draw(shift(2,0)*unconvex);
+
+drawsegment((-1.25, 1.8), (-.11, .8));
+drawsegment((-.9,-.8), (-1.66, 1.45));
+
+label("convex", (-1, -1.6));
+
+drawsegment((2.5, -.7), (3.1, .9), drawpen = currentpen+red);
+
+label("not convex", (2, -1.6));
+\end{asy}
+
+% \vspace{1cm}
+\end{wrapfigure}
+
+In a vector space, by convex sets we typically understand those that with every pair of points contain the segment connecting them. As it often is in abstract mathematics, the definition can be generalized in order to study the concept by its properties. As a result, the \textit{convex space} is introduced:
+
+\begin{definition}[\(\catname{Convex}\)]\label{def-cs}
+    A set \(X\) equipped with a family \(\C\) of its subsets is called a \textit{convex space} if
+
+    \begin{itemize}
+        \item[\bf (CS-1)] Both \(\varnothing\) and \(X\) lie in \(\C\);
+        \item[\bf (CS-2)] For every subfamily \(\A \subset \C\) the intersection \(\bigcap \A\) lies in \(\C\);
+        \item[\bf (CS-3)] If \(\A \subset \C\) is \textit{up-directed} (meaning that for each pair of sets \(A, B \in \A\) there exists such a set \(C \in \A\) that \(A, B \subset C\)), then the union \(\bigcup \A\) lies in \(\C\).  
+    \end{itemize}
+
+    The family \(\C\) is called a \textit{convexity} or \textit{convex structure} on \(X\), and its members are called \textit{convex sets}.
+
+    A map \(f \colon X \to Y\) between two convex spaces is called \textit{convex-preserving} (CP) if the preimage \(f^{-1}(B)\) of any convex set \(B \subset Y\) is convex in \(X\). Convex spaces together with CP-maps form a category, namely \(\catname{Convex}\).
+\end{definition}
+
+\begin{definition}[Convex hull]
+    Let \(X\) be a convex space. For a subset \(A \subset X\) its \textit{convex hull} \(\tp{A}\) is defined to be the intersection of all convex sets that contain \(A\): \[\tp{A} = \bigcap\limits_{\substack{B \in \C \\ B \supset A}} B.\] \(A \subset X\) is convex if and only if it is equal to its convex hull.
+\end{definition}
+
+
+\begin{definition}[\(\catname{Betweenness}\)]\label{def-btw}
+    A set \(X\) equipped with a binary relation \(\btw \hbox{ (``between'') } \subset X \times 2^X_{\rm fin}\), where \(2^X_{\rm fin}\) denotes the set of all finite subsets of \(X\), is called a \textit{betweenness space} if
+
+    \begin{itemize}
+        \item[\bf (B-1)] No point is between the empty set;
+        \item[\bf (B-2)] If \(x \in F\) then \(x\) is between \(F\);
+        \item[\bf (B-3)] If \(x\) is between \(G\) and each point of \(G\) is between \(F\), then \(x\) is between \(F\).  
+    \end{itemize}
+
+    A map \(f \colon X \to Y\) between two betweenness spaces will be called \textit{betweenness-preserving} (BP), or a \textit{metamorphism}, if \(x \btw F \Rightarrow f(x) \btw f(F)\) for all \(x \in X\), \(F \in 2^X_{\bf fin}\). Betweenness spaces together with metamorphisms form a category, namely \(\catname{Betweenness}\).
+\end{definition}
+
+\begin{definition}[Betweenness hull]
+    Let \(X\) be a betweenness space. For a finite subset \(F \subset X\) we will define its \textit{betweenness hull} \(\tp{F}_\btw\) to be the set of all points between \(F\): \(\tp{F}_\btw = \{x \in X \mid x \btw F\}\). The betweenness hull can be defined for an arbitrary subset \(A \subset X\) as follows: \[\tp{A}_\btw = \{x \in X \mid \exists F \subset A,\ |F| < \infty: \ x \btw F\} = \bigcup\limits_{\substack{F \subset A \\ |F| < \infty}} \tp{F}_\btw.\]
+\end{definition}
+
+\begin{theorem}\label{th-equivalent}
+    \(\catname{Convex}\) and \(\catname{Betweenness}\) are equvalent categories.
+\end{theorem}
+
+% We leave the technical proof of this theorem as an exercise for the reader.
+
+The proof is provided in the subsection \ref{ap-th-equivalent}.
+
+\begin{definition}[Polytope]\label{def-poly}
+    Let \(X\) be a convex space. A convex subset \(P \subset X\) is called a \textit{polytope} if there exists a \textit{finite} set \(F \subset X\) which \textit{generates} \(P\), that is, \(\tp{F} = P\). A generating set \(F\) is called \textit{convex-independent} if no point \(x \in F\) lies between \(F \setminus \{x\}\). Finally, \(F\) is called a \textit{basis} of a polytope \(P\), denoted by \(\bas P\), if it is both generating and convex-independent.
+\end{definition}
+
+\begin{remark}
+    It is not hard to see that all bases of any polytope are exactly minimal generating sets. Thus, every polytope has a basis. However, it may not be unique. The simplest counterexample is the \textit{antidiscrete} convexity --- only the empty set and the whole space are convex. In this case, each and every single point generates the space. Furthermore, a polytope may have two bases of different cardinality. To see this, consider the set \(\R \times \R\) with the convexity \(\{A \times B \mid A, B \hbox{ are convex in } \R\}\).
+
+    \begin{center}
+    \begin{asy}
+        size(8cm);
+
+        draw((-.05,0)--(1,0), arrow = ArcArrow(SimpleHead));
+        draw((0,-.05)--(0,1), arrow = ArcArrow(SimpleHead));
+
+        pair v1 = (.7,.4);
+        pair v2 = (.7,1.1);
+        pair v3 = (1.8,1.1);
+        pair v4 = (1.8,.4);
+
+        real nudge = .1;
+        pair vnudge = (0, nudge);
+        pair hnudge = (nudge, 0);
+
+        draw(v1-vnudge--v1, dashed);
+        draw(v2+vnudge--v2, dashed);
+        draw(v2-hnudge--v2, dashed);
+        draw(v3+hnudge--v3, dashed);
+        draw(v3+vnudge--v3, dashed);
+        draw(v4-vnudge--v4, dashed);
+        draw(v4+hnudge--v4, dashed);
+        draw(v1-hnudge--v1, dashed);
+
+        filldraw(v1--v2--v3--v4--cycle, drawpen = blue+.8, fillpen = blue+opacity(.1));
+
+        dot(v1);
+        dot(v2);
+        dot(v3);
+        dot(v4, linewidth(4pt));
+
+        real rad = .02;
+
+        filldraw(circle(v1, rad), fillpen = red);
+        filldraw(circle(v3, rad), fillpen = red);
+
+        filldraw(circle(v2, rad), fillpen = green);
+        filldraw(circle((v1+v4)/2, rad), fillpen = green);
+        filldraw(circle((v3+v4)/2, rad), fillpen = green);
+    \end{asy}
+    \end{center}
+    
+    We can see that both the red and the green points are bases for the blue rectangle, but they have different cardinalities (2 and 3).
+\end{remark}
+
+Note that the equivalence of \(\catname{Convex}\) and \(\catname{Betweenness}\) is very important knowledge. It tells us that, since the relation ``between'' involves only \textit{finite} sets, the convex structure can be described using hulls of only \textit{finite} sets. In other words, any convexity is ``defined by its polytopes''. And polytopes, due to their finite nature, are often relatively easy to analyze.
+
+\begin{definition}
+    Let \(\A\) be a family of subsets of a convex space \(X\). The convex set \(\tp{\bigcup \A}\) is called the \textit{convex union} of the family and is denoted by \(\tp{\A}\).
+\end{definition}
+
+\begin{remark}
+    Let \(P_1\), \(P_2\), ..., \(P_k\) be a collection of polytopes and let \(F_1\), \(F_2\), ..., \(F_k\) be their generating sets, respectively. The convex union \(\tp{P_1, P_2, ..., P_k}\) is also a polytope, and the union \(\bigcup F_i\) is its generating set.
+\end{remark}
+
+\begin{definition}\label{def-free}
+    A polytope is called \textit{free} if it has a \textbf{unique} basis. A free convex space (or free convexity) is one that contains only free polytopes.
+\end{definition}
+
+\begin{definition}[Dimension]\label{def-dim}~
+    \begin{itemize}
+        \item The \textit{dimension} \(\dim{P}\) of a polytope \(P\) is defined to be the smallest number \(n\) such that \(P\) is contained in the union of finitely many polytopes, each generated by a set of at most \(n+1\) points.
+        
+        \item Let \(A\) be an arbitrary subset of a convex space \(X\). For each point \(x \in A\) consider the \textit{dimension number} \(\eta_x = \max \{k \mid \exists P : \ x \in P \subset A \ \& \ \dim{P} = k\}\) (this number may be infinite). Now, if \(\eta_x = \eta_y = n\) for all \(x, y \in A\), we call \(n\) the \textit{dimension} of \(A\) and write \(n = \dim A\).
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}\label{poly-dim}
+    The polyhedral dimension operator has the following properties:
+
+    \begin{enumerate}
+        \item Bounded: \(\dim P \lle |\bas P| - 1\) for every polytope \(P\);
+        \item Monotone: \(P \subset Q \Rightarrow \dim P \lle \dim Q\) for every two polytopes \(P\), \(Q\);
+        \item Union property: \[\max (\dim{P_1}, \dim{P_2}) \lle \dim{\tp{P_1, P_2}}\] for every pair of polytopes \(P_1\), \(P_2\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Obvious.
+\end{proof}
+
+% \begin{proof}
+%     The first two statements are trivial, so we will confine ourselves to proving the third one. Consider two polytopes, \(P_1\) and \(P_2\). The inequality \[\max (\dim{P_1}, \dim{P_2}) \lle \dim{\tp{P_1, P_2}}\] follows from statement (2). Now, assume that \(\dim P_1 = m\) amd \(\dim P_2 = l\). Let \(\{F_i^1\}_{i = 1}^{k}\) and \(\{F_j^2\}_{j = 1}^{s}\) be families of finite sets of cardinality \(\lle m+1\) and \(\lle l+1\) respectively such that \[P_1 \subset \bigcup\limits_{i = 1}^k \tp{F^1_i} \ \mbox{  and  } \ P_2 \subset \bigcup\limits_{j = 1}^s \tp{F^2_j}\] Consider the finite family of sets \(G_{i, j} = F^1_i \cup F^2_j\). Each of them has 
+% \end{proof}
+
+\begin{corollary}
+    It follows from statement (1) that every polytope has a dimension. If a polytope \(P\) satisfies the equality \(\dim P = \bas P - 1\), then \(P\) is called a \textit{simplex}.
+\end{corollary}
+
+\begin{proposition}\label{set-dim}
+    The generalized dimension operator has the following properties:
+
+    \begin{enumerate}
+        \item Every convex set has a dimension;
+        
+        \item Suppose that two subsets \(A, B \subset X\) both have dimensions. Then \(A \subset B \Rightarrow \dim A \lle \dim B\);
+        
+        \item Let \(P\) be a polytope. Then, as a set, it has a dimension, and this dimension equals its dimension as a polytope: \(\dim_{Set} P = \dim_{Poly} P = \dim P\);
+        
+        \item Let \(A\) be a convex subset of \(X\). For every polytope \(P \subset A\) there exists a polytope \(Q\) such that \(P \subset Q \subset A\) and \(\dim Q = \dim A\);
+        
+        \item Let \(\A\) be a family of subsets of \(X\). If every set in \(\A\) has a dimension then \(\tp{\A}\) has a dimension and \(\dim{\tp{\A}} \gge \dim S \ \forall S \in \A\). 
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We first show that (1) is true. Let \(A\) be a convex set, \(x, y \in A\). Suppose that \(P_x\) and \(P_y\) are polytopes such that \[x \in P_x \subset A, \ \ y \in P_y \subset A, \ \ \dim P_x = \eta_x, \ \ \dim P_y = \eta_y.\] Consider the polytope \(P = \tp{P_x, P_y}\). From the one side, we have \(\dim P \gge \max (\eta_x, \eta_y)\). From the other, by the definition of dimension numbers we know that \(\eta_x \gge \dim P\) and \(\eta_y \gge \dim P\). Therefore, \(\eta_x = \dim P = \eta_y\), and \(A\) has a dimension. We leave the case when either \(\eta_x\) or \(\eta_y\) is infinite as an excercise for the reader.\\
+    
+    Statement (2) is trivial.\\
+    
+    Now, we prove (3). Consider a point \(x \in P\). Since \(P\) is a polytope, we see that \(\eta_x \gge \dim_{Poly} P\). Now, suppose that \(x \in Q \subset P\). It follows from proposition \ref{poly-dim} that \(\dim_{Poly} Q \lle \dim_{Poly} P\). As a consequence, \(\eta_x = \max \{\dim_{Poly} Q \mid x \in Q \subset P\} \lle \dim_{Poly} P\), hence the equality \(\eta_x = \dim_{Poly} P\). Therefore, \(\dim_{Set} P\) exists and equals \(\dim_{Poly} P\).\\
+    
+    To verify (4), let \(\dim A = n\) and let \(P \subset A\) be a polytope. Consider \(\{x_1, x_2, ..., x_k\}\) to be one of its generating sets. By definition, for each point \(x_i\) there exists a polytope \(Q_i\) such that \(x_i \in Q_i \subset A\) and \(\dim Q_i = n\). Let \(Q = \tp{Q_1, Q_2, ..., Q_k}\). We can see that \[n = \dim Q_i \lle \dim Q \lle \dim A = n,\] and so \(\dim Q = n\). Finally, since \(x_i \in Q \ \forall i\), we conclude that \(P \subset Q\), and statement (4) is proven.\\
+    
+    Statement (5) trivially follows from statements (1) and (2).
+\end{proof}
+
+\begin{definition}[Hyperplane]\label{def-hyper}
+    Let \(X\) be a convex space. Consider an up-directed (by inclusion) family (or, simply, a \textit{net}) \(\A\) of polytopes in \(X\) that satisfies the following:
+
+    \begin{enumerate}
+        \item All polytopes in \(\A\) are of the same dimension, say \(m\);
+        
+        \item \(\A\) is \textit{maximal}, meaning that every net \(\B\) that satisfies condition 1 and contains \(\A\) must be equal to \(\A\).
+    \end{enumerate}
+
+    The family \(\A\) is then called an \(m\)-dimensional \textit{hyperplane family}, or a \textit{hyperfamily}. The union \(\bigcup \A = \tp{\A}\) is called an \(m\)-\textit{dimensional hyperplane}.
+\end{definition}
+
+\begin{proposition}\label{hyper-1}
+    Let \(\A\) be a hyperfamily of dimension \(m\). The following hold true:
+    
+    \begin{enumerate}
+        \item Every polytope \(P \subset \tp{\A}\) is contained in some polytope \(Q \in \A\).
+        
+        \item The hyperplane \(\tp{\A}\) does indeed have dimension \(m\).
+        
+        \item If \(\dim \A = \dim X\) then \(\tp{\A} = X\).
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    To see that (1) holds, consider a polytope \(P \subset \tp{A}\) and let \(\{x_1, x_2, ..., x_k\}\) be its generating set. Each point \(x_i\) lies in some polytope \(P_i \in \A\). Now, since \(\A\) is a net, there is a polytope \(Q \in \A\) such that \(P_i \subset Q\) for all \(i\), and thus \(P \subset Q\).\\
+
+    Now, we verify (2). Note that \(\tp{\A}\) has a dimension by proposition \ref{set-dim}, as a convex set. Consider a point \(x \in \tp{\A}\). It is contained in some \(m\)-dimensional polytope \(P \in \A\), and so \(\eta_x \gge m\). Now, take any polytope \(Q\) such that \(x \in Q \subset \tp{A}\). By the previous statement we see that there is a polytope \(R \in \A\) such that \(Q \subset R\), and so \(\dim Q \lle \dim R = m\). Therefore, \(\eta_x \lle m\), and we conclude that \(\eta_x = m\).\\
+
+    Lastly, consider a point \(x \in X\). The family \[\B = \{\tp{\bas P \cup \{x\}} \mid P \in \A\} \cup \A\] is a hyperfamily, and \(\A \subset \B\), hence \(\A = \B\). Since \(x \in \tp{\B}\), we have \(x \in \tp{\A}\), and so \(X = \tp{\A}\).
+\end{proof}
+
+\begin{theorem}\label{th-hyper-unique}
+    Every hyperplane is generated by a unique hyperfamily.
+\end{theorem}
+\begin{proof}
+    Consider two hyperfamilies \(\A\), \(\B\) and suppose that \(\tp{\A} = \tp{\B}\). We need to show that \(\A = \B\). Since \(\dim \tp{\A} = \dim \tp{\B}\), we have \(\dim \A = \dim \B\) by the previous proposition. At the same time, the family \(\C = \A \cup \B\) is a hyperfamily. Thus, since both \(\A\) and \(\B\) are maximal, we see that \(\A = \C = \B\).
+\end{proof}
+
+\begin{lemma}[\textit{The Polytope Union Lemma}]\label{tpul}
+    Let \(P\), \(Q\) and \(L\) be polytopes such that \(L \subset P \cap Q\) and \(\dim P = \dim Q = \dim L = m\). Then the convex union \(\tp{P, Q}\) is also of dimension \(m\).
+\end{lemma}
+
+This lemma cannot be easily proven. Moreover, generally speaking, it is not even true. Consider the following partially ordered continuous set:\\
+
+\begin{center}
+\begin{asy}
+size(13cm);
+
+add(part);
+
+draw(a[3]{W}..{W}a[2], arrow = MidArcArrow(SimpleHead));
+draw(a[5]{W}..{W}a[2], arrow = MidArcArrow(SimpleHead));
+draw(a[2]--a[1], arrow = MidArcArrow(SimpleHead));
+
+dot(a[1], dotpen);
+dot(a[3], dotpen);
+dot(a[5], dotpen);
+
+\end{asy}
+\end{center}
+
+The betweenness relation \[z \btw F \equ \mbox{there are } x, y \in F \mbox{ such that } x \lle z \lle y\] equips it with a free convexity (see subsection \ref{order} for detail). Let \(P = \tp{a, b}\) (shown in red below), \(Q = \tp{a, c}\) (shown in blue), and \(L = P \cap Q\). It is easy to see that all three polytopes are one-dimensional. However, the polytope \(\tp{P, Q}\) (shown in green) is clearly of dimension two.
+
+\begin{center}
+\begin{asy}[width = \textwidth]
+
+picture p, q, pq;
+
+p.add(part);
+q.add(part);
+pq.add(part);
+
+draw(p, a[5]{W}..{W}a[2], arrow = MidArcArrow(SimpleHead));
+dot(p, a[1], polytopedotpen+red);
+dot(p, a[3], polytopedotpen+red);
+dot(p, a[5], dotpen);
+draw(p, a[3]{W}..{W}a[2], p = polytopepen+red, arrow = MidArcArrow(SimpleHead));
+draw(p, a[2]--a[1], p = polytopepen+red, arrow = MidArcArrow(SimpleHead));
+
+label(p, "\(\dim P = 1\)", (0, -1.3));
+
+add(shift(-6,0)*p);
+
+
+draw(q, a[3]{W}..{W}a[2], arrow = MidArcArrow(SimpleHead));
+dot(q, a[1], polytopedotpen+blue);
+dot(q, a[5], polytopedotpen+blue);
+dot(q, a[3], dotpen);
+draw(q, a[5]{W}..{W}a[2], p = polytopepen+blue, arrow = MidArcArrow(SimpleHead));
+draw(q, a[2]--a[1], p = polytopepen+blue, arrow = MidArcArrow(SimpleHead));
+
+label(q, "\(\dim Q = 1\)", (0, -1.3));
+
+add(q);
+
+
+dot(pq, a[1], polytopedotpen+deepgreen);
+dot(pq, a[3], polytopedotpen+deepgreen);
+dot(pq, a[5], polytopedotpen+deepgreen);
+draw(pq, a[5]{W}..{W}a[2], p = polytopepen+deepgreen, arrow = MidArcArrow(SimpleHead));
+draw(pq, a[3]{W}..{W}a[2], p = polytopepen+deepgreen, arrow = MidArcArrow(SimpleHead));
+draw(pq, a[2]--a[1], p = polytopepen+deepgreen, arrow = MidArcArrow(SimpleHead));
+
+label(pq, "\(\dim \tp{P, Q} = 2\)", (0, -1.3));
+
+add(shift(6,0)*pq);
+\end{asy}
+\end{center}
+
+Lemma \ref{tpul} does, however, relate strongly to properties of hyperplanes. Consider a polytope \(P\) of dimension \(m\). It can be shown by Zorn's lemma that there is an \(m\)-dimensional hyperplane containing \(P\). But is it true that the union \(\bigcup \{Q \mid P \subset Q \ \mbox{and} \ \dim Q = m\}\) of all \(m\)-dimensional polytopes containing \(P\) is a hyperplane? And, in reverse, is it true that all hyperplanes are of the form of such unions? Surprisingly, lemma \ref{tpul} provides an answer to these questions:
+
+\begin{theorem}\label{th-tpul}
+    The following are equivalent in a convex space \(X\):
+
+    \begin{enumerate}
+        \item The Polytope Union Lemma;
+        \item For every polytope \(P\) there is a hyperfamily \(\A\), and, in opposite, for every hyperfamily \(\A\) there is a polytope \(P\) such that \(\tp{\A} = h(P) := \bigcup \{Q \mid P \subset Q \ \mbox{and} \ \dim Q = m\}\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}~
+    \begin{itemize}
+        \item[\(\Longrightarrow\):] Let \(P\) be an \(m\)-dimensional polytope. Consider the family \(\B = \{Q \mid P \subset Q \ \& \ \dim Q = m\}\) and from it derive the family \(\A = \{L \mid \dim L = m \ \mbox{and} \ \exists Q \in \B: \ L \subset Q\}\) of all polytope subsets of \(\B\). We will prove that \(\A\) is a hyperfamily. First of all, it follows from the Polytope Union Lemma that \(\A\) is a net, since for every pair of polytopes \(M, N \in \A\) tha polytope \(\tp{M, N}\) lies in \(\A\). Now, let \(\C\) be a net containing \(\A\). Take a polytope \(K \in \C\). As \(\C\) is a net, there is a polytope \(L \in \C\) such that \(P \cup K \subset L\). Since \(P \subset L\), we see that \(L\) is an element of \(\B\), and, therefore, \(K \subset L\) is an element of \(\A\). Thus, \(\A = \C\), and \(\A\) is a hyperfamily. Finally, it is easy to see that \(\tp{\A} = \bigcup \A = \bigcup \B = h(P)\).
+        
+        Now, let \(\A\) be a hyperfamily. Choose any polytope \(P \in \A\). We will show that \(\tp{\A} = h(P)\). For every \(m\)-dimensional polytope \(Q \supset P\) the family \[\B = \{\tp{Q, L} \mid L \in \A, \ P \subset L\} \cup \A\] is a net by the Polytope Union Lemma. It then follows from \(\A \subset \B\) that \(\A = \B\), and, consequently, \(Q \subset \tp{\A}\). Therefore, \(h(P) \subset \A\). The reverse inclusion is trivial: \[\tp{\A} = \bigcup \A = \bigcup \{Q \in \A \mid P \subset Q\} \subset h(P),\] and we conclude that \(\tp{\A} = h(P)\).
+
+        \item[\(\Longleftarrow\):] Suppose that \(P\), \(Q\) and \(L\) are polytopes of equal dimension, and \(L \subset P \cap Q\). Consider the set \(h(L)\). Due to our assumption, there is a hyperfamily \(\A\) such that \(\tp{\A} = h(L)\). Since \(P, Q \subset h(L) = \tp{\A}\), by proposition \ref{hyper-1} we can state the existence of polytopes \(P_1, Q_1 \in \A\) such that \(P \subset P_1\) and \(Q \subset Q_1\). Now, \[\tp{P, Q} \subset \tp{P_1, Q_1} \subset K \in \A,\] because \(\A\) is a net. Finally, \[m = \dim L \lle \dim \tp{P, Q} \lle \dim K = m,\] and the proof is concluded.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    If the Polytope Union Lemma holds in a convex space then every \(m\)-dimensional polytope is contained in a \textbf{unique} \(m\)-dimensional hyperplane.
+\end{corollary}
+
+\begin{definition}\label{def-0-dim-ext}
+    Let \((X, \C)\) be any convex space. Consider a point \(y \nin X\) and the set \(X' = X \cup \{y\}\). It can be equipped with the convexity \(\C' = \C \cup \{X'\}\). The space \(X'\), called the \textit{one-point extension} of \(X\), is almost identical to the original space, with one key difference. Note that \(\tp{y} = X'\), and so \(X'\) is a zero-dimensional polytope, hence a zero-dimensional space. Thus, every convex set in \(X'\) is also of dimension zero. Roughly speaking, the one-point extension is a way to trivialize the dimension of every set in a space without significantly changing its convexity.
+\end{definition}
+
+\begin{remark}
+    Observe that if a convex space is free, its extension is also free. Additionally, in a one-point extension, as in any zero-dimensional space, the Polytope Union Lemma holds.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Where does it come from?}
+
+Convexity is commonly studied in the context of vector spaces, with the linear structure \textit{inducing} the definition of a convex set. In this paper we will focus on less renowned convexity-generating structures, starting from partial orders.
+
+\subsection{Order convexity}\label{order}
+
+\begin{definition}\label{def-ord-conv}
+    Consider a set \(X\) with a partial order \(\lle\). We define a convexity on \(X\) with the following betweenness relation: \[a \btw F \equ \mbox{there are points } x, y \in F \mbox{ such that } x \lle a \lle y.\] It is easy to see that all three convexity axioms follow trivially from properties of partial orders.
+\end{definition}
+
+\begin{observation}\label{ord-singl-obs}
+    In a convexity induced by a partial order all singletons are convex sets. In general, we define convex spaces holding this property to be \textit{0-affine}.
+\end{observation}
+
+
+\begin{theorem}\label{th-ord-free}
+    Let \((X, \lle)\) be a partially ordered set. Then the induced convexity on \(X\) is free.
+\end{theorem}
+\begin{proof}
+    Consider a polytope \(P \subset X\) and suppose that \(F\), \(G\) are both its bases. We will show that \(F = G\). Let \[H = \{x \in F \mid x \mbox{ is a minimal element in } F\} \cup \{x \in F \mid x \mbox{ is a maximal element in } F\} \subset F.\] Take a point \(a \in H\) and assume that it is maximal in \(F\). For every point \(x \in P\) there is a point \(f \in F\) such that \(x \lle f\), and thus \[a \lle x \ \Rightarrow \ a \lle x \lle f \ \Rightarrow \ a \lle f \ \Rightarrow \ a = f = x,\]  and we see that the point \(a\) is also maximal in \(P\). Now, as \(G\) generates \(P\), there is an element \(g \in G\) such that \(a \lle g\). Since \(a\) is maximal, \(a = g\) and \(a \in G\). As the steps are analogical for \(a\) being a minimal element, we conclude that \(H\) is a subset of \(G\).
+
+    Now, we will show that \(H\) generates \(P\). Take a point \(f \in F\). One can easily prove that since \(F\) is finite, \(f\) lies between a minimal point and a maximal one. In other words, there are points \(a, b \in H\) such that \(a \lle f \lle b\). By definition is means that \(f \btw H\). Now, for every point \(x \in P\) we have \(x \btw F \btw H\) and therefore \(x \btw H\), which shows that \(H\) is a generating set.
+
+    Finally, we remember that the bases \(F\) and \(G\) are minimal (by inclusion) generating sets. Thus, it follows from \(F \supset H \subset G\) that \(F = H = G\), and the theorem is proved.
+\end{proof}
+
+\begin{lemma}\label{order-unique}
+    Let \((X, \lle)\) be a linearly ordered set such that \(|X| > 1\). Then
+
+    \begin{enumerate}
+        \item The induced convex space is of dimension at most one;
+        \item There is only one other linear ordering that induces the same convexity---the reversed order \(\gge\). In other words, linear order can be reconstructed from convexity accurate to direction.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}~
+    \begin{enumerate}
+        \item It is obvious that, due to linearity, every triple of points in \(X\) is convex-dependent. Therefore, the dimension of any polytope is at most one.
+        %Now, according to observation \ref{ord-singl-obs} each non-singleton polytope is exactly one-dimensional. Finally, since \(|X| > 1\), each point in \(X\) is contained in a one-dimensional polytope, which means that \(\dim X = 1\).
+        
+        \item Suppose a linear order \(\varlle\) gives the same convexity on \(X\). Consider two distinct points \(a, b \in X\) and assume without loss of generality that \(a \lle b\) and \(a \varlle b\). We will show that \(\lle\) and \(\varlle\) are the same order. Take another two points \(x, y \in X\) such that \(x \lle y\). Without loss of generality we can say that \(a \lle b \lle x \lle y\) (in case of a different relative positioning the proof proceeds analogically). Thus, first, \(b\) lies between \(a\) and \(x\). It means that either \(a \varlle b \varlle x\) or \(x \varlle b \varlle a\). Since \(a \varlle b\), the second option it out of consideration, and we have \(b \varlle x\). Now, second, \(x\) lies between \(b\) and \(y\). Since \(b \varlle x\), we similarly conclude that \(x \varlle y\).
+        
+        Analogically, we consider points \(x, y \in X\) such that \(x \varlle y\) and show that \(x \lle y\). As a result, \(\lle\) and \(\varlle\) are equivalent orders, and the proof is concluded.
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    Note that the previous lemma is not true for arbitrary partial orders. Consider the set \(X = \{0, 1\}\) and two orders --- the antidescrete order \(\{(0,0), (1,1)\}\) and the descrete \(\{(0,0), (1,1), (0,1)\}\). We can see that they are not isomorphic, nonetheless, they induce the same descrete convexity.
+\end{remark}
+
+\begin{definition}\label{def-1-affine}
+    Let \(X\) be a convex space. We call a subset \(A \subset X\) \textit{linear} if its convexity with respect to \(X\) is generated by some linear order. Note that if \(A\) is linear and \(B \subset A\) then \(B\) is also linear. The space \(X\), in turn, is called \textit{1-affine} if each \textit{segment} \(\tp{a, b} \subset X\) is \textit{linear}. It is easy to see that every 1-affine space is also 0-affine.
+\end{definition}
+
+\begin{lemma}\label{0-1-affine}
+    A convex space \(X\) is 1-affine if and only if \(X\) is 0-affine and every one-dimensional hyperplane (or, simply, convex line) in \(X\) is linear.
+\end{lemma}
+\begin{proof}~
+    \begin{itemize}
+        \item[\(\Longrightarrow\):] Suppose that \(X\) is 1-linear and consider a convex line \(\tp{\A}\) in \(X\). Let us understand that every one-dimensional polytope \(P\) in \(X\) is linear owing to the definition of dimension, as \(P\) is contained in some linear segment. Now, take two distinct points \(a, b \in \tp{\A}\). Observe that every polytope \(Q \in \A\), \(Q \supset \{a, b\}\), is linear, and we can choose the linear order \(\lle_Q\) on \(Q\) in such a way that \(a\) is less than \(b\), due to lemma \ref{order-unique}. It then follows that for every pair of polytopes \(P, Q \in \A\), both containing \(\{a, b\}\), we have \(x \lle_P y \Leftrightarrow x \lle_Q y\) whenever \(x, y \in P \cap Q\). Thus, we can correctly define a linear order on the whole hyperplane \(\tp{\A}\) by stating \[x \lle y \equ \mbox{there is a polytope } P \mbox{ such that } x \lle_P y.\] It is then easy to see that this order generates the given convexity on \(\tp{\A}\), which makes it a linear set.
+        
+        \item[\(\Longleftarrow\):] Now assume that \(X\) is 0-affine and all convex lines are linear. Due to 0-affinity we notice that each segment, that is, convex hull of two points, is of dimension one. Consider a segment \(\tp{a, b}\), \(a \ne b\). We need to show that it is linear. Consider the set \(S\) of all nets of one-dimensional polytopes which include \(\tp{a, b}\). \(S\) is non-empty, as \(\{\tp{a, b}\} \in S\), and so by Zorn's lemma \(S\) contains a maximal element \(\A\). By definition, \(\tp{\A}\) is a convex line, which is linear by assumption. Finally, \(\tp{a, b}\) is linear as a subset of the linear set \(\tp{\A}\).
+    \end{itemize}
+\end{proof}
+
+\begin{definition}\label{def-n-affine}
+    Let \(X\) be a convex space. The properties of 0- and 1-affinity may be generalized. Recursively, following lemma \ref{0-1-affine}, \(X\) will be called \(n\)-\textit{affine} if \(X\) is \((n-1)\)-affine the following condition holds: for every \(n\)-dimensional hyperplane \(H \subset X\), for each \((n-1)\)-dimensional hyperplane \(L \subset H\), there exist two non-empty sets \(A, B \subset H\) such that:
+
+    \begin{itemize}
+        \item \(A \cap B = \varnothing\), \(A \cap L = \varnothing\), \(B \cap L = \varnothing\);
+        \item Both \(A\) and \(B\) are convex;
+        \item If a finite set \(F\) intersects both \(A\) and \(B\) then the hull \(\tp{F}\) intersects \(L\).
+    \end{itemize}
+
+    That is, \(L\) divides \(H\) into two \textit{half-spaces}.
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Metric convexity and segmentiality}
+\label{mcs}
+
+\begin{definition}\label{def-met-conv}
+    Let \((M, d)\) be a metric space. For points \(a, b \in M\) define the \textit{metric segment} \([a, b]\) to be the set of all points \(x \in M\) such that \[d(a, x) + d(x, b) = d(a,b).\] We call a set \(A \subset M\) \textit{convex} if for each pair of points \(a, b \in A\) the segment \([a, b]\) is contained in \(A\). The resulting convexity is called \textit{metric}.
+\end{definition}
+
+\begin{remark}
+    Note that a segment may not be a convex set. Consider the set \(\{a, b, x, y, z\}\) with the following metric:
+
+    \begin{center}
+        \begin{asy}
+            size(10cm, 6cm);
+
+            pair a = (-2, 5), b = (-1, -3), x = (-4, 0), y = (4, 1.5), z = (0, 2);
+
+            label(a, "\(a\)", align = 1.1*N);
+            label(b, "\(b\)", align = S);
+            label(x, "\(x\)", align = W);
+            label(y, "\(y\)", align = E);
+            label(z, "\(z\)", align = .9*E+N);
+
+            drawsegment(a, y);
+            drawsegment(y, b);
+            drawsegment(x, b);
+            drawsegment(a, x);
+            drawsegment(a, b);
+            drawsegment(a, z);
+            drawsegment(z, b);
+            drawsegment(x, z);
+            drawsegment(z, y);
+            drawsegment(x, y);
+
+            label("\(1\)", a--x, align = (0,0), filltype = Fill(white));
+            label("\(1\)", a--y, align = (0,0), filltype = Fill(white));
+            label("\(1\)", x--b, align = (0,0), filltype = Fill(white));
+            label("\(1\)", y--b, align = (0,0), filltype = Fill(white));
+            label("\(2\)", a--z, align = (0,0), filltype = Fill(white));
+            label(Label("\(2\)", position = Relative(.25)), a--b, align = (0,0), filltype = Fill(white));
+            label("\(2\)", z--b, align = (0,0), filltype = Fill(white));
+            label(Label("\(2\)", position = Relative(.67)), x--y, align = (0,0), filltype = Fill(white));
+            label(Label("\(1\)", position = Relative(.35)), x--z, align = (0,0), filltype = Fill(white));
+            label("\(1\)", z--y, align = (0,0), filltype = Fill(white));
+        \end{asy}
+    \end{center}
+
+    We see that \([a, b] = \{a, x, y, b\}\), and \([x, y] = \{x, z, y\} \not\subset [a, b]\), hence \([a, b]\) is not convex.
+    
+    It is therefore important to differentiate between a metric segment \([a, b]\) and a \textbf{convex} segment \(\tp{a, b}\).
+\end{remark}
+
+\begin{observation}
+    Observe that any metric convexity is 0-affine.
+\end{observation}
+
+\begin{definition}\label{def-segm}
+    In general, an arbitrary convex space \(X\) is called \textit{segmential} if the following condition holds: any subset \(A \subset X\) is convex if and only if it contains the \textit{convex segment} \(\tp{a, b}\) with every two points \(a, b \in A\).
+
+    Now, consider a subset \(A \subset X\). Its \textit{(segmential) derivative} \(s(A)\) is defined to be the union of all segments connecting points of \(A\): \[s(A) = \bigcup_{a, b \in A} \tp{a, b}.\] Construct the sequence \(A_k = s^k(A)\): \(A_0 = A, \ A_{k+1} = s(A_k)\). It is easy to see that, if \(X\) is segmential, the convex hull of \(A\) is the union of this sequence: \[\tp{A} = \bigcup_{k = 0}^{\infty} A_k.\] Now, if the corresponding sequence of every finite set \textit{stabilizes}, that is, if for every finite \(F \subset X\) we have \(\tp{F} = s^N(F)\) for some \(N\), then we say that the space \(X\) is \textit{finite-segmential}.
+\end{definition}
+
+% \begin{definition}
+%     We call a metric space \((M, d)\) \textit{dense} if for every pair of points \(a, b \in M\) and for every real number \(\varepsilon > 0\) there is a finite sequence of points \(\{x_k\}_{k = 1}^{n}\) such that \(x_1 = a\), \(x_n = b\) and \(d(x_k, x_{k+1}) < \varepsilon\).
+% \end{definition}
+
+% \begin{definition}
+%     Consider a metric space \(M\). It is called \textit{chain-regular} if the following condition holds for every polygonal chain \(x_0, x_1, ..., x_n \in M\): \[\forall k: \ x_{k+1} \in [x_k, x_{k+2}] \implic \forall k: \ x_k \in [x_0, x_n].\] That is, if every three consequtive vertices form a segment then the whole chain forms one segment.
+
+%     This notion is close to what the Polytope Union Lemma states in convex spaces. In fact, if the induced metric convexity satisfies the PUL for one-dimensional polytopes, and its convex segments are precisely metric segments, then the metric itself is chain-regular.
+% \end{definition}
+
+\begin{definition}\label{def-join}
+    Let \(X\) be a convex space, \(x \in X\), \(S \subset X\). The \textit{join} of \(x\) and \(S\) is defined to be the following union: \[x \vee S = \bigcup_{s \in S} \tp{x, s}.\]
+
+    The space \(X\) is called \textit{join-commutative} if \(x \vee \tp{F} = \tp{x \cup F}\) for every point \(x \in X\) and every finite non-empty set \(F \subset X\).
+\end{definition}
+
+\begin{lemma}\label{join-comm}
+    Suppose that a convex space \(X\) is segmential and 2-affine. Assume also that it satisfies the Polytope Union Lemma. Then \(X\) is join-commutative.
+\end{lemma}
+\begin{proof}
+    Consider a finite set \(F \subset X\) and a point \(x \nin \tp{F}\). It suffices to show that \(x \vee \tp{F}\) is a convex set. Let \(a, b \in x \vee \tp{F}\) and let \(y \in \tp{a, b}\). By definition there exist points \(f_a, f_b \in \tp{F}\) such that \(a \in \tp{x, f_a}\) and \(b \in \tp{x, f_b}\). We may safely assume the non-trivial case, where all points are distinct from each other.
+    
+    Consider the 2-dimensional hyperplane \(H\) produced by the triangle \(\tp{x, f_a, f_b}\), and the 1-dimensional hyperplane \(L_1 \subset H\) produced by the convex segment \(\tp{x, y}\). Since \(y \in \tp{a, b} \cap L_1\), we understand that \(a\) and \(b\) belong to different half-spaces relative to \(L_1\), and so we deduce, as \(a \in \tp{x, f_a}\) and \(b \in \tp{x, f_b}\), that \(f_a\) and \(f_b\) also belong to different half-spaces. Therefore, the segment \(\tp{f_a, f_b}\) intersects \(L_1\) at some point \(f \in \tp{f_a, f_b} \subset \tp{F}\).
+
+    Now, consider the 1-dimensional hyperplane \(L_2\) produced by the segment \(\tp{a, b}\). Is is not hard to see that points \(f_a\) and \(f_b\) lie in the same half-space relative to this hyperplane, while \(x\) lies in the other. Thus, \(x\) and \(f\) lie in different half-spaces. Finally, since \(X\) is also 1-affine, \(L_1\) is linearly ordered, and so \(y\) must belong to the segment \(\tp{x, f} \subset x \vee \tp{F}\), and the proof is concluded.
+\end{proof}
+
+\begin{theorem}\label{th-segm-free}
+    Let \(X\) be a finite-segmential, 2-affine convex space, in which the Polytope Union Lemma holds. Consider a polytope \(P \subset X\), and let \(F\) one of its bases, with an element \(f \in F\). Let \(G = F \setminus \{f\}\). Then
+
+    \begin{enumerate}
+        \item If \(a, b \in P\) and \(f \in \tp{a, b}\), then \(f = a\) or \(f = b\);
+        \item If \(f \btw H \subset P\) then \(f \in H\);
+        \item \(P\) is a free polytope.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}~
+    First, we verify statement (1). Suppose that \(f \in \tp{a, b} \subset P\) and suppose that \(f \nin \{a, b\}\). By lemma \ref{join-comm} we see that \(X\) is join-commutative, and therefore \(P = f \vee \tp{G}\), meaning that there are points \(g_a, g_b \in \tp{G}\) such that \(a \in \tp{g_a, f}\) and \(b \in \tp{f, g_b}\). Now, applying the Polytope Union Lemma twice to convex segments \(\tp{g_a, f}\), \(\tp{a, b}\), and \(\tp{f, g_b}\), we conclude that \(f \in \tp{g_a, g_b} \subset \tp{G}\), contradiction.\\
+
+    Now, to see that (2) holds, assume that \(f \btw H\), that is, \(f \in \tp{H}\). Since \(X\) is finite-segmential, we understand that \(\tp{H} = H_N\), where \(N \in \N\), \(H_{k+1} = s(H_k)\), and \(H_0 = H\). Therefore, by the previous statement we have \[f \in H_N \implic f \in H_{N-1} \implic ... \implic f \in H_1 \implic f \in H.\]
+
+    Finally, we prove that \(P\) is free. Let \(H\) be another basis of \(P\). For every \(f \in F\) we have \(f \btw H \ \Rightarrow \ f \in H\), and thus \(F \subset H\). Similarly, \(H \subset F\), and so \(F = H\), which concludes the proof.
+\end{proof}
+
+
+
+\begin{definition}\label{def-unigeo}
+    Let \((M, d)\) be a metric space. A continuous (with respect to the standard metric topology) injection \(f \colon [0, 1] \to M\) is called a \textit{path} in \(M\). We consider two paths equal if their beginnings and endings match, and they produce the same image. Furthermore, we may consider any continuous injection \(f \colon [\alpha, \beta] \to M\) to be a path, as \([\alpha, \beta]\) is naturally isomorphic to \([0,1]\). The \textit{length} of a path is defined to be the upper bound of lengths of all polygonal chains approximating it: \[l(f) = \sup \left\{\sum_{k = 0}^{n-1} d(f(x_k), f(x_{k+1})) \mid x_k \in [0,1], \ x_k < x_{k+1}\right\}\] The space \(M\) will be called a \textit{length space} if
+
+    \begin{itemize}
+        \item[(1)] Every two points are connected with a path, and every path has a finite length;
+        \item[(2)] The distance between every two points matches the lower bound of lengths of all paths connecting these points: \[\forall a, b \in M: \ \ d(a, b) = \inf \{l(f) \mid f(0) = a, \ f(1) = b\}.\]
+    \end{itemize}
+
+    We will call a length space \(M\) \textit{uniquely geodesic} if the above infimium is achieved at a unique path, called a \textit{geodesic line} and denoted by \(\g(a, b)\): \[\forall a, b \in M: \ \ \exists ! f \colon [0,1] \to M: \ \ f(0) = a, \ f(1) = b, \ d(a, b) = l(f).\]
+\end{definition}
+
+\begin{remark}\label{subgeodesic}
+    Any piece of a geodesic line is a geodesic line. That is, if \(f = \g(a,b)\) and \(x, y \in \im{f}\), \(f^{-1}(x) < f^{-1}(y)\), then \(\g(x, y) = \restrmid{f}{[f^{-1}(x), f^{-1}(y)]}\).
+\end{remark}
+
+\begin{remark}
+    Suppose that \(f\) and \(g\) are two paths such that \(f(1) = g(0)\). The path \(f+g\) is defined as follows: \[(f+g)(t) = \begin{cases}
+        f(2t), \ 0 \lle t \lle \frac{1}{2} \\
+        g(2t-1), \ \frac{1}{2} \lle t \lle 1
+    \end{cases}\]
+
+    \vspace{1.5mm}
+
+    It is easy to see that path length is additive, that is, \(l(f+g) = l(f) + l(g)\).
+\end{remark}
+
+\begin{lemma}\label{unigeo-1}
+    Let \(M\) be a uniquely geodesic space and let \(f\) be a geodesic line connecting points \(a\) and \(b\). Then the image of \(f\) is precisely the segment between \(a\) and \(b\): \(\im{f} = [a, b]\).
+\end{lemma}
+\begin{proof}
+    Let us first show that \(\im{f}\) is a subset of \([a, b]\). Take a point \(x \in \im{f}\). Let \(t = f^{-1}(x)\) and consider \[f_1 = \restrmid{f}{[0, t]} \ \mbox{    and    } \ f_2 = \restrmid{f}{[t, 1]}\] With reference to remark \ref{subgeodesic} let us understand that \(f_1\) and \(f_2\) are geodesic lines for points \(a\), \(x\) and \(x\), \(b\) respectively. Therefore, we have \[d(a, b) = l(f) = l(f_1) + l(l_2) = d(a, x) + d(x, b),\] and we conclude that \(x \in [a, b]\).
+
+    Now we will show that the reverse inclusion holds. Consider \(x \in [a, b]\). Let \(f_1\) be the geodesic of \(a\), \(x\) and let \(f_2\) be that of \(x\), \(b\). We see that the path \(g := f_1+f_2\) is a geodesic for \(a\), \(b\), as \[l(g) = l(f_1) + l(f_2) = d(a, x) + d(x, b) = d(a, b).\] Since there can be only one geodesic line connecting two points, we deduce that \(f = g\), and thus \(x \in \im{g} = \im{f}\), which concludes the proof.
+\end{proof}
+
+\begin{lemma}\label{unigeo-2}
+    Let \(M\) be a uniquely geodesic space. Then in the induced convexity segments are precisely convex segments, that is, \([a, b] = \tp{a, b}\) for all \(a, b \in M\).
+\end{lemma}
+\begin{proof}
+    Let \(a, b \in M\). It suffices to show that the segment \([a, b]\) is a convex set. Consider \(f = \g(a,b)\) and \(c, d \in [a, b] = \im{f}\). Now, according to remark \ref{subgeodesic}, we see that \[[c, d] = \im{\g(c, d)} \subset \im{f} = [a, b],\] quod erat demonstrandum.
+\end{proof}
+
+\begin{lemma}\label{unigeo-3}
+    In a uniquely geodesic space every convex segment is free.
+\end{lemma}
+\begin{proof}
+    Let \(M\) be uniquely geodesic and suppose that \(a, b, c, d \in M\) are such that \([a, b] = [c, d]\). Let \(f = \g(a, b)\). Without loss of generality, we may assume that \(f^{-1}(c)\) is less than \(f^{-1}(d)\). Therefore, for the paths \(f_1 = \g(a, c)\), \(f_2 = \g(c, d)\), and \(f_3 = \g(d, b)\) we have \(f = f_1 + f_2 + f_3\), and so \[l(f) = l(f_1) + l(f_2) + l(f_3).\] At the same time, \[\im{f} = [a, b] = [c, d] = \im{f_2},\] ergo \(l(f) = l(f_2)\). Consequently, \[d(a, c) = l(f_1) = 0 \implic a = c,\] \[d(b, d) = l(f_3) = 0 \implic b = d.\] 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Convex geometry}
+
+In this section we will study the applications of convexity in the context of differential and Riemannian geometry. We will start by inducing a topology on convex spaces, satisfying the following conditions:
+
+\begin{itemize}\label{CT}
+    \item[\textbf{(CT-1)}] Freedom. It is of importance since there will be many direct references to bases of polytopes, and it is crucial that each polytope have a unique basis.
+    \item[\textbf{(CT-2)}] The Polytope Union Lemma.
+    \item[\textbf{(CT-3)}] Finite dimension. The intuition (and the definition) of the standard topology on \(\R^n\) suggests that all open sets be of full dimension. In order to follow that intuition, we shall assume this property.
+\end{itemize}
+
+\begin{definition}\label{def-poly-int}
+    Consider a convex space \(X\) and a polytope \(P \subset X\). Let \(F\) be its basis and let \[\E = \{\tp{G} \mid G \subset F \mbox{ and } \dim \tp{G} < \dim X\}.\] Now, the convex set \(\tp{P \setminus \bigcup \E}\) is called the \textit{convex interior} of \(P\) and is denoted by \(\ConvInt{P}\). 
+\end{definition}
+
+\begin{remark}
+    It is not hard to see that the convex interior of every non-full-dimensional polytope is empty.
+\end{remark}
+
+The following is an important statement:
+
+\begin{lemma}[The Polytope Intersection Lemma]\label{tpil}
+    Suppose that two polytopes \(P\), \(Q\) in a convex space \(X\) are such that \(\ConvInt{P} \cap \ConvInt{Q} \ne \varnothing\). Then the intersection \(P \cap Q\) is also a polytope, \(\dim{(P \cap Q)} = \dim X\), and \(\ConvInt{(P \cap Q)} = \ConvInt{P} \cap \ConvInt{Q}\).
+\end{lemma}
+
+This statement is also not generally true. Consider the set of natural numbers \(\N\) with the standard order, and add two distinct incomparable ``infinity'' symbols \(\infty_1\) and \(\infty_2\), such that \(n \lle \infty_{1,2}\) for all \(n \in \N\). The result is a free two-dimensional convex space \(X = \N \cup \{\infty_1, \infty_2\}\). Finally, take the one-point extension \(X'\) of this convex space.
+
+\begin{center}
+\begin{asy}[width = \textwidth]
+
+pair[] b = new pair[6];
+
+for (int i = 0; i < b.length; ++i) {b[i] = (i, 0);}
+
+for (int i = b.length-1; i > 1; --i)
+{
+    draw(b[i] -- b[i-1], arrow = MidArcArrow(SimpleHead));
+}
+
+dot(b[0], dotpen);
+label("\(y\)", b[0], align = 1.5*S);
+
+for (int i = 1; i < b.length; ++i) 
+{
+    dot(b[i], dotpen);
+    label((string)i, b[i], align = 1.5*S);
+}
+
+label("\ldots", (b.length-.6, 0));
+
+dot("\(\infty_1\)", align = 1.5*E, (b.length+.5, .5));
+dot("\(\infty_2\)", align = 1.5*E, (b.length+.5, -.5));
+
+draw((b.length+.5, .5) -- (b.length-.5, 0), arrow = MidArcArrow(SimpleHead), margin = Margin(begin = 0, end = 5));
+draw((b.length+.5, -.5) -- (b.length-.5, 0), arrow = MidArcArrow(SimpleHead), margin = Margin(begin = 0, end = 5));
+
+// drawWFunction(l = new string[]{"1", "2"}, mode = -1);
+\end{asy}
+\end{center}
+
+We can see that the space \(X'\) satisfies conditions \textbf{(CT-1)} -- \textbf{(CT-3)}. Consider the polytopes \(P = \tp{1, \infty_1}\) and \(\tp{1, \infty_2}\). The convex interior of both polytopes is \(\{2, 3, ...\}\), and so the conditions of lemma \ref{tpil} are satisfied. The intersection \(P \cap Q\), however, equals \(\N\), which is clearly not a polytope. Therefore, the Polytope Intersection Lemma does not hold for \(X'\).
+
+\begin{definition}\label{def-conv-top}
+    The Polytope Intersection Lemma ensures that the family of convex interiors of all polytopes is a \textit{base of a topology}. For this reason, we will include it in the list of assumed conditions as \textbf{(CT-4)}. Now, a convex set \(X\) satisfying \textbf{(CT-1)} -- \textbf{(CT-4)} can be equipped with a topology generated by the base \[\B = \{\ConvInt{P} \mid P \mbox{ is a polytope in } X\}.\]
+\end{definition}
+
+
+
+\begin{definition}
+    A set \(X\) with a family \(\Le\) of its subsets is called a \textit{locally convex space} if
+
+    \begin{itemize}
+        \item[\textbf{(LC-1)}] The empty set lies in \(\Le\);
+        \item[\textbf{(LC-2)}] If \(\A \subset \Le\) then \(\bigcap \A \in \Le\);
+        \item[\textbf{(LC-3)}] If \(\A \subset \Le\) is a net then \(\bigcup \A \in \Le\);
+        \item[\textbf{(LC-4)}] Every point \(x \in X\) lies in some convex set \(A \in \Le\). 
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    We call two locally convex spaces \(X\) and \(Y\) \textit{locally isomorphic} if for every pair of points \(x \in X\), \(y \in Y\) there are convex neighborhoods \(A \ni x\) and \(B \ni y\) which are isomorphic as convex spaces.
+\end{definition}
+
+\begin{statement}
+The open two-dimensional disk \(B^2\) is \textbf{not} isomorphic to the Eucledian plane \(\R^2\) in the category of convex spaces, but they are locally isomorphic.
+\end{statement}
+\begin{proof}
+    Let us notice that on the plane every polytope fits within some triangle, and on the bounded open disk this is not the case. Therefore, these spaces are not isomorphic. However, every point is contained in the Eucledian plane with an open disk isometric to \(B^2\), and so locally \(\R^2\) is isomorphic to \(B^2\).
+\end{proof}
+
+\begin{remark}
+    With the same reasoning one can see that the open hemisphere is not isomorphic to the open disk.
+\end{remark}
+
+\begin{observation}
+    Consider a Riemannian manifold \((M, \tp{\cdot, \cdot})\). The induced geodesic metric equips \(M\) with a local convexity. It is shown in \cite{book3} that every riemannian manifold is a locally uniquely geodesic space. Therefore, it enjoys properties of geodesic convexities discussed in subsection \ref{mcs}.
+\end{observation}
+
+
+
+\section{Conclusion}
+
+In this work we have examined convex spaces from different angles, considering their internal properties, the structures that induce convexity, and the structures convexity induces itself. The last area provides wide prospects for further research, as the idea of convexity is deeply incorporated in the theory of Riemannian manifolds.
+
+
+
+
+\begin{thebibliography}{99}
+    \bibitem{book1} M.L.J. van de Vel, \textit{Theory of convex structures}, North-Holland mathematical library, ELSEVIER SCIENCE PUBLISHERS B.V., 1993;
+
+    \bibitem{book2} David C. Kay, Eugine W. Womble, \textit{AXIOMATIC CONVEXITY THEORY AND RELATIONSHIPS BETWEEN THE CARATH\'EODORY, HELLY, AND RADON NUMBERS}, Pacific Journal of Mathematics, 1971;
+
+    \bibitem{book3} John M. Lee, \textit{Introduction to Riemannian Manifolds}, Department of Mathematics, University of Washington, Seattle, WA, USA, 2018. %D. Gromoll, W. Klingenberg and W. Meyer, \textit{``Riemannsche Geometrie im Grossen''}, Springer-Verlag, Berlin, 1968.
+\end{thebibliography}
+
+
+
+
+
+\section{Appendix}
+
+\subsection{Proof of theorem \ref{th-equivalent}} \label{ap-th-equivalent}
+
+\begin{proof}~
+\begin{itemize}
+    \item[$\longrightarrow$] Let \(X\) be a betweenness space. We will induce a convex structure on \(X\) in the following way:
+    
+    \begin{center}
+        \(A\) is convex \Equ \(A = \tp{A}_\btw\) \Equ \(\forall F \subset A, \ |F| < \infty : \ \tp{F}_\btw \subset A\).
+    \end{center}
+
+    We will show that the resulting family of subsets is, in fact, a convexity on \(X\):
+
+    \begin{itemize}
+        \item[(CS-1)] Trivial.
+        \item[(CS-2)] Consider a family \(\{A_\alpha\}_\alpha\) of convex sets and a finite subset \(F \subset \bigcap\limits_\alpha A_\alpha\). We have \(F \subset A_\alpha\) for all \(\alpha\) and, thus, \(\tp{F}_\btw \subset A_\alpha\) for all \(\alpha\). From this we conclude that \(\tp{F}_\btw \subset \bigcap\limits_\alpha A_\alpha\) and \(\bigcap\limits_\alpha A_\alpha\) is convex.
+        \item[(CS-3)] Let \(\{A_\alpha\}_\alpha\) be an up-directed family of convex sets. Every finite subset \(F \subset \bigcup\limits_\alpha A_\alpha\) has to be contained in some \(A_\xi\). Therefore, \(\tp{F}_\btw \subset A_\xi \subset \bigcup\limits_\alpha A_\alpha\).
+    \end{itemize}
+
+    We have defined the functor \(\mathcal{C} \colon \catname{Betweenness} \to \catname{Convex}\) on objects. We will set \(\mathcal{C}(f) := f\) for every betweenness-preserving map \(f\). The proof of correctness is trivial.\\
+
+    \item[$\longleftarrow$] Let \(X\) be a convex space. We will induce a betweenness structure on \(X\) in the following way:
+
+    \begin{center}
+        \(x\) is between a finite set \(F\) \Equ \(x \in \tp{F}\).
+    \end{center}
+
+    Similarly, we will show that the resulting binary relation is, in fact, a betweenness structure on \(X\):
+
+    \begin{itemize}
+        \item[(B-1)] Trivial.
+        \item[(B-2)] Trivial.
+        \item[(B-3)] Suppose that \(x \btw G\) and \(y \btw F\) for all \(y \in G\). Then we have \(G \subset \tp{F} \implic \tp{G} \subset \tp{F}\) and \(x \in \tp{G} \implic x \in \tp{F} \implic x \btw F\).
+    \end{itemize}
+
+    Thus, we have the functor \(\mathcal{B} \colon \catname{Convex} \to \catname{Betweenness}\) defined on objects. We will set \(\mathcal{B}(f) = f\) for every convex-preserving map \(f\). The proof of correctness is, again, trivial.
+\end{itemize}
+
+All that is left to prove is that the two functors reverse each other: \[\mathcal{C} \circ \mathcal{B} = \mathrm{id} \ \ \mbox{and} \ \ \mathcal{B} \circ \mathcal{C} = \mathrm{id}\]
+
+First, consider a convex space \(X\). We now must prove that every subset \(A \subset X\) is convex if and only if it is convex in \((\mathcal{B} \circ \mathcal{C})(X)\). In other words, we must prove the following:
+
+\begin{center}
+    \(A\) is convex \Equ \(\forall F \subset A, \ |F| < \infty: \ \tp{F} \subset A\).
+\end{center}
+
+\begin{itemize}
+    \item[\(\Longrightarrow\):] Trivial.
+    \item[\(\Longleftarrow\):] Consider the family of convex hulls of all finite subsets of \(A\). Obviously, this family is up-directed. The set \(A\) is therefore convex as the union of the mentioned family.
+\end{itemize}
+
+Now, consider a betweenness space \(X\). Similarly, we need to prove the following: \[x \btw F \equ x \in \tp{F} := \bigcap\limits_{\substack{A \supset F \\ A = \tp{A}_\btw}} A .\]
+
+\begin{itemize}
+    \item[\(\Longrightarrow\):] Since \(x\) is between \(F\), it is between any set \(A\) that contains \(F\). Thus, \[x \in \bigcap\limits_{\substack{A \supset F \\ A = \tp{A}_\btw}} \tp{A}_\btw = \bigcap\limits_{\substack{A \supset F \\ A = \tp{A}_\btw}} A.\]
+    \item[\(\Longleftarrow\):] It is not hard to see that the set \(\tp{F}_\btw\) is equal to its betweenness hull and contains \(F\). Therefore, \[x \in \bigcap\limits_{\substack{A \supset F \\ A = \tp{A}_\btw}} A \subset \tp{F}_\btw \implic x \btw F,\] and the proof of the theorem is concluded.
+\end{itemize}
+\end{proof}
+
+\end{document}

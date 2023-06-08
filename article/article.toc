@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Preface}{3}{section.1}%
+\contentsline {section}{\numberline {2}Introduction to convexity}{4}{section.2}%
+\contentsline {section}{\numberline {3}Where does it come from?}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Order convexity}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Metric convexity and segmentiality}{12}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Convex geometry}{16}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion}{17}{section.5}%
+\contentsline {section}{\numberline {6}Appendix}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Proof of theorem \ref {th-equivalent}}{18}{subsection.6.1}%
