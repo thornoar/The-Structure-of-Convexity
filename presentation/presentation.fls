@@ -1,8 +1,8 @@
-PWD s:/Projects/Convex/presentation
+PWD S:/Projects/Convex/presentation
 INPUT c:/texlive/2023/texmf.cnf
 INPUT c:/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT s:/Projects/Convex/presentation/presentation.tex
+INPUT presentation.tex
 OUTPUT presentation.log
 INPUT c:/texlive/2023/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT c:/texlive/2023/texmf-dist/tex/latex/beamer/beamer.cls

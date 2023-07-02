@@ -1,12 +1,12 @@
 # Fdb version 4
-["pdflatex"] 1686086520 "s:/Projects/Convex/abstract/abstract.tex" "abstract.pdf" "abstract" 1686086522 0
+["pdflatex"] 1687944720 "abstract.tex" "abstract.pdf" "abstract" 1687944722 0
   "../../Libs/LaTeX/Asymptote/Asymptote.tex" 1686084779 994 97742e10b7b009406cc8a432fdfbfe7f ""
   "../../Libs/LaTeX/Graphics.tex" 1678302741 637 3775bbadfa0d26bc0723d657e6821c80 ""
   "../../Libs/LaTeX/Math.tex" 1681803335 9690 d4a4bcd7683e19a3c00f5c1695ce267c ""
   "../../Libs/LaTeX/Theorem_eng.tex" 1677605683 2612 aef914198052847336d372877e49e107 ""
-  "abstract.aux" 1686086522 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "abstract.pre" 1686086521 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "abstract.tex" 1686086516 5226 7364f2d2fb12ca635a61ffa43f945604 ""
+  "abstract.aux" 1687944722 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "abstract.pre" 1687944721 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "abstract.tex" 1687944720 5185 cdccf45057e2ca0dda71ed97b76e7e5b ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1680645742 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc" 1680651237 3275 8d7166dfdbc31ffdc8aba0c31b3bd5c8 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc" 1680651237 3375 808c88761dbdc66fc653d18f42765b64 ""
@@ -189,7 +189,6 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680658203 4595267 236f04743eee71b954aea4d676b3df16 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680658305 7725222 e65dea3f71175c54f706046bde2f68ab ""
   "c:/texlive/2023/texmf.cnf" 1680658186 713 e69b156964470283e0530f5060668171 ""
-  "s:/Projects/Convex/abstract/abstract.tex" 1686086516 5226 7364f2d2fb12ca635a61ffa43f945604 ""
   (generated)
   "abstract.aux"
   "abstract.log"

@@ -49,11 +49,6 @@ draw(part, a[6]--a[5], arrow = MidArcArrow(SimpleHead));
 draw(part, a[4]--a[3], arrow = MidArcArrow(SimpleHead));
 draw(part, a[1]--a[0], arrow = MidArcArrow(SimpleHead));
 
-for (int i = 0; i < 7; ++i)
-{
-    //dot(part, a[i], dotpen);
-}
-
 label(part, "\(a\)", a[1], 2*S);
 label(part, "\(b\)", a[3], 2*N);
 label(part, "\(c\)", a[5], 2*S);
@@ -544,16 +539,6 @@ Lemma \ref{tpul} does, however, relate strongly to properties of hyperplanes. Co
 
 
 
-
-
-
-
-
-
-
-
-
-
 \section{Where does it come from?}
 
 Convexity is commonly studied in the context of vector spaces, with the linear structure \textit{inducing} the definition of a convex set. In this paper we will focus on less renowned convexity-generating structures, starting from partial orders.
@@ -567,7 +552,6 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
 \begin{observation}\label{ord-singl-obs}
     In a convexity induced by a partial order all singletons are convex sets. In general, we define convex spaces holding this property to be \textit{0-affine}.
 \end{observation}
-
 
 \begin{theorem}\label{th-ord-free}
     Let \((X, \lle)\) be a partially ordered set. Then the induced convexity on \(X\) is free.

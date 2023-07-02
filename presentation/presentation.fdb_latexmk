@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1686087042 "s:/Projects/Convex/presentation/presentation.tex" "presentation.pdf" "presentation" 1686087047 0
+["pdflatex"] 1687946042 "presentation.tex" "presentation.pdf" "presentation" 1687946047 0
   "../../Libs/LaTeX/Asymptote/Asymptote.tex" 1686084779 994 97742e10b7b009406cc8a432fdfbfe7f ""
   "../../Libs/LaTeX/Graphics.tex" 1678302741 637 3775bbadfa0d26bc0723d657e6821c80 ""
   "../../Libs/LaTeX/Math.tex" 1681803335 9690 d4a4bcd7683e19a3c00f5c1695ce267c ""
@@ -310,12 +310,11 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680658203 4595267 236f04743eee71b954aea4d676b3df16 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680658305 7725222 e65dea3f71175c54f706046bde2f68ab ""
   "c:/texlive/2023/texmf.cnf" 1680658186 713 e69b156964470283e0530f5060668171 ""
-  "presentation.aux" 1686087046 4493 57ac23aac4ce0fc95da0df846da2522e "pdflatex"
-  "presentation.nav" 1686087046 2858 dd86187c1514f7476b4327a12dde1801 "pdflatex"
-  "presentation.out" 1686087046 718 c7409a1ad246388995df755759d94b4d "pdflatex"
-  "presentation.pre" 1686087043 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "presentation.tex" 1686087034 6275 f5bb6f5c99acaa0639044f0a5e6be3c9 ""
-  "s:/Projects/Convex/presentation/presentation.tex" 1686087034 6275 f5bb6f5c99acaa0639044f0a5e6be3c9 ""
+  "presentation.aux" 1687946046 4493 57ac23aac4ce0fc95da0df846da2522e "pdflatex"
+  "presentation.nav" 1687946046 2858 dd86187c1514f7476b4327a12dde1801 "pdflatex"
+  "presentation.out" 1687946046 718 c7409a1ad246388995df755759d94b4d "pdflatex"
+  "presentation.pre" 1687946043 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "presentation.tex" 1687946034 6277 186555cf8f30ca79d41b42880c1fcce0 ""
   (generated)
   "presentation.aux"
   "presentation.log"

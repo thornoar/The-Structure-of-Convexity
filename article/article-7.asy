@@ -41,11 +41,6 @@ draw(part, a[6]--a[5], arrow = MidArcArrow(SimpleHead));
 draw(part, a[4]--a[3], arrow = MidArcArrow(SimpleHead));
 draw(part, a[1]--a[0], arrow = MidArcArrow(SimpleHead));
 
-for (int i = 0; i < 7; ++i)
-{
-//dot(part, a[i], dotpen);
-}
-
 label(part, "\(a\)", a[1], 2*S);
 label(part, "\(b\)", a[3], 2*N);
 label(part, "\(c\)", a[5], 2*S);
