@@ -1,40 +1,40 @@
 # Fdb version 4
-["cusdep asy tex article-1"] 1687947389 "article-1.asy" "article-1.tex" "article-1" 1688305151 0
-  "article-1.asy" 1688305151 1703 5b2d607eb9bc15921740f0e45dc29012 "pdflatex"
+["cusdep asy tex article-1"] 1687947389 "article-1.asy" "article-1.tex" "article-1" 1688304098 0
+  "article-1.asy" 1688304098 1703 5b2d607eb9bc15921740f0e45dc29012 "pdflatex"
   (generated)
   "article-1.tex"
   (rewritten before read)
-["cusdep asy tex article-2"] 1687947387 "article-2.asy" "article-2.tex" "article-2" 1688305151 0
-  "article-2.asy" 1688305151 1530 4002b8d5080a903d20e47a1a162e3ac3 "pdflatex"
+["cusdep asy tex article-2"] 1687947387 "article-2.asy" "article-2.tex" "article-2" 1688304098 0
+  "article-2.asy" 1688304098 1530 4002b8d5080a903d20e47a1a162e3ac3 "pdflatex"
   (generated)
   "article-2.tex"
   (rewritten before read)
-["cusdep asy tex article-3"] 1687947385 "article-3.asy" "article-3.tex" "article-3" 1688305151 0
-  "article-3.asy" 1688305151 2017 0e4ed7689b56be5ec8200a77f4ee541e "pdflatex"
+["cusdep asy tex article-3"] 1687947385 "article-3.asy" "article-3.tex" "article-3" 1688304098 0
+  "article-3.asy" 1688304098 2017 0e4ed7689b56be5ec8200a77f4ee541e "pdflatex"
   (generated)
   "article-3.tex"
   (rewritten before read)
-["cusdep asy tex article-4"] 1687947382 "article-4.asy" "article-4.tex" "article-4" 1688305151 0
-  "article-4.asy" 1688305151 1381 cdaa8d327cd0da3d56f214e68974ae49 "pdflatex"
+["cusdep asy tex article-4"] 1687947382 "article-4.asy" "article-4.tex" "article-4" 1688304098 0
+  "article-4.asy" 1688304098 1381 cdaa8d327cd0da3d56f214e68974ae49 "pdflatex"
   (generated)
   "article-4.tex"
   (rewritten before read)
-["cusdep asy tex article-5"] 1687947380 "article-5.asy" "article-5.tex" "article-5" 1688305151 0
-  "article-5.asy" 1688305151 2412 da6edee7a5dfc5d53ea059be82e9697f "pdflatex"
+["cusdep asy tex article-5"] 1687947380 "article-5.asy" "article-5.tex" "article-5" 1688304098 0
+  "article-5.asy" 1688304098 2412 da6edee7a5dfc5d53ea059be82e9697f "pdflatex"
   (generated)
   "article-5.tex"
   (rewritten before read)
-["cusdep asy tex article-6"] 1687947377 "article-6.asy" "article-6.tex" "article-6" 1688305151 0
-  "article-6.asy" 1688305151 2282 a130c400961b179773686ac6bda1595e "pdflatex"
+["cusdep asy tex article-6"] 1687947377 "article-6.asy" "article-6.tex" "article-6" 1688304098 0
+  "article-6.asy" 1688304098 2282 a130c400961b179773686ac6bda1595e "pdflatex"
   (generated)
   "article-6.tex"
   (rewritten before read)
-["cusdep asy tex article-7"] 1687947375 "article-7.asy" "article-7.tex" "article-7" 1688305151 0
-  "article-7.asy" 1688305151 1938 b50fdd1a04da74855dca8a9a16f3c898 "pdflatex"
+["cusdep asy tex article-7"] 1687947375 "article-7.asy" "article-7.tex" "article-7" 1688304098 0
+  "article-7.asy" 1688304098 1938 b50fdd1a04da74855dca8a9a16f3c898 "pdflatex"
   (generated)
   "article-7.tex"
   (rewritten before read)
-["pdflatex"] 1688305150 "article.tex" "article.pdf" "article" 1688305151 0
+["pdflatex"] 1688304097 "article.tex" "article.pdf" "article" 1688304098 0
   "../../Libs/LaTeX/Asymptote/Asymptote.tex" 1686084779 994 97742e10b7b009406cc8a432fdfbfe7f ""
   "../../Libs/LaTeX/Graphics.tex" 1678302741 637 3775bbadfa0d26bc0723d657e6821c80 ""
   "../../Libs/LaTeX/Math.tex" 1681803335 9690 d4a4bcd7683e19a3c00f5c1695ce267c ""
@@ -313,10 +313,10 @@
   "article-7.pre" 1687947377 770 e97300b778b3cd70909a1d9f96617c46 ""
   "article-7.tex" 1687947377 1693 ec83ac6eeaa78fcc485b5c46abfe41f4 "cusdep asy tex article-7"
   "article-7_0.pdf" 1687947377 2943 3d98ab062be395594f6ec98b4c56c712 ""
-  "article.aux" 1688305151 6252 5591c6e6081e45ac14409ee8ed38cb59 "pdflatex"
-  "article.pre" 1688305151 287 b8d374e85ef033c966cc9f2e0194f9d9 "pdflatex"
-  "article.tex" 1688305142 59776 56083221b949fb0c65105c2decdec8b4 ""
-  "article.toc" 1688305151 716 036789b0ebed292fe7daed337e087022 "pdflatex"
+  "article.aux" 1688304098 6252 5591c6e6081e45ac14409ee8ed38cb59 "pdflatex"
+  "article.pre" 1688304098 287 b8d374e85ef033c966cc9f2e0194f9d9 "pdflatex"
+  "article.tex" 1688304095 59771 7276acda84e69e75c27f66502af88de1 ""
+  "article.toc" 1688304098 716 036789b0ebed292fe7daed337e087022 "pdflatex"
   (generated)
   "article-1.asy"
   "article-2.asy"
