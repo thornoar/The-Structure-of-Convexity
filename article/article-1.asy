@@ -67,5 +67,3 @@ draw(backHemisphere, surfacepen = material(white+opacity(0.8), emissivepen=0.1*w
 draw(frontHemisphere, surfacepen=material(white+opacity(0.8),
 emissivepen=0.1*white), meshpen=gray(0.4));
 
-
-

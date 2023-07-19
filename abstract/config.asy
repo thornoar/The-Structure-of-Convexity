@@ -1,1 +1,0 @@
-include "C:/Users/ramak/Dropbox/Libs/Asymptote/config.asy";
