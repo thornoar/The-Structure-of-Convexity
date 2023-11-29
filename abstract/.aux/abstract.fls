@@ -2,7 +2,7 @@ PWD /home/ramak/projects/Convex/abstract
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT abstract.tex
-OUTPUT abstract.log
+OUTPUT .aux/abstract.log
 INPUT /usr/share/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
 INPUT /usr/share/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
 INPUT /usr/share/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
@@ -1156,12 +1156,12 @@ INPUT /usr/share/texmf-dist/tex/latex/sttools/flushend.sty
 INPUT /usr/share/texmf-dist/tex/latex/sttools/flushend.sty
 INPUT /usr/share/texmf-dist/tex/latex/sttools/flushend.sty
 INPUT /usr/share/texmf-dist/tex/latex/sttools/flushend.sty
-INPUT ./abstract.aux
-INPUT abstract.aux
-INPUT abstract.aux
-OUTPUT abstract.aux
+INPUT .aux/abstract.aux
+INPUT .aux/abstract.aux
+INPUT .aux/abstract.aux
+OUTPUT .aux/abstract.aux
 INPUT /usr/share/texmf-dist/tex/latex/graphics/color.sty
-OUTPUT abstract.pdf
+OUTPUT .aux/abstract.pdf
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1282,7 +1282,7 @@ INPUT /usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolF.enc
 INPUT /usr/share/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT abstract.aux
+INPUT .aux/abstract.aux
 INPUT /usr/share/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol7.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb

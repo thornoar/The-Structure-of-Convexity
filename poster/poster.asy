@@ -4,7 +4,7 @@ settings.render = 0;
 size(841mm, 1189mm);
 
 // import "LaTeX/General.asy" as general;
-import "smoothmanifold/smoothmanifold.asy" as smooth;
+import "./smoothmanifold.asy" as smooth;
 
 real w = 300;
 real h = w * 1189 / 841; //h = 424.13793103448273, h/2 = 212
@@ -407,7 +407,7 @@ pair tt3 = (-.5, -2.1);
 drawpolytope(sub2, new pair[]{tt1,tt2,tt3}, drawpen = dashedpen);
 add(shift(-76, 42)*scale(5.7)*sub2);
 
-path itcont3 = shift(-95, 25)*scale(16)*rotate(-70)*samplesmooth(2).holes[0].contour;
+path itcont3 = shift(-104, 62)*scale(25)*rotate(-87)*samplesmooth(2).holes[0].contour;
 filldraw(itcont3, fillpen = white, drawpen = boxtitlebubblepen);
 addtext(s = "Freedom", a = (-119, 37.5));
 pair f1 = (-130, 61);
@@ -777,39 +777,15 @@ addtext(s = "Convexity", a = (122.5, 67));
 
 
 
-smooth s = smooth(
-    contour = reflect((0,0), (0,1))*samplesmooth(2).contour,
-    holes = new hole[]{
-        hole(
-            contour = samplesmooth(2).holes[0].contour,
-            shift = (.1,-.6),
-            scale = 1.4,
-            rotate = -70,
-            sections = new real[][]{
-                new real[] {dummynumber, dummynumber, 290, 10, .65, 200}
-            }
-        )
-    },
-    subsets = new subset[]{
-        subset(
-            contour = yscale(1.3)*shift(-path_middle(iscont3))*iscont3,
-            scale = .08,
-            rotate = 70,
-            shift = (2,-.7),
-            label = "\Huge \(U\)",
-            labeldir = W+.2*N
-        )
-    }
-);
-s.move(shift = (97, 40), rotate = 50, scale = 5.3);
-s.set_label("\Huge \(M\)", labeldir = (W+.4*S));
-draw(s, contourpen = textbubblepen, sectionpen = p, viewdir = dir(45), subsetpen = mediumgreen+cyan);
+smooth s = samplesmooth(1,1);
+s.move(shift = (93, 41), rotate = 4, scale = 19.3);
+draw(s, contourpen = textbubblepen, sectionpen = p, viewdir = .07 * dir(45), subsetpen = mediumgreen+cyan);
 
 
 
 
 
-filldrawpolytope(new pair[]{(100, 43), (107, 50), (112, 44)});
+filldrawpolytope(new pair[]{(100, 43), (107, 50), (110, 44)});
 
 
 path istcont4 = shift(98.5, -4)*rotate(20)*yscale(.85)*scale(1.05)*shift(-path_middle(iscont4))*iscont4;
@@ -831,8 +807,8 @@ filldraw(istcont5, fillpen = white, drawpen = boxtitlebubblepen);
 addtext(s = "Riemannian", a = (96.5, -35));
 picture sub23;
 smooth s2 = samplesmooth(3);
-s2.move(scale = 3.6, rotate = -90);
-draw(sub23, s2, viewdir = dir(-45), contourpen = p, sectionpen = linewidth(.4mm));
+s2.move(scale = 15.6, rotate = -75);
+draw(sub23, s2, viewdir = .1 * dir(-45), contourpen = p, sectionpen = linewidth(.4mm));
 pair clippair = (15,2);
 path clippath = circle(clippair, 4);
 draw(sub23, clippath, p+blue);
@@ -848,7 +824,7 @@ dot(sub24, Label("\Huge \(x\)", align = 1.5*E+1.5*S), x4, dotpen);
 dot(sub24, Label("\Huge \(y\)", align = 1.5*E+S), y4, dotpen);
 sub23.add(clipsh*sub24);
 draw(sub23, clipsh*clippath, p+blue);
-add(shift(81.5,-56)*sub23);
+add(shift(81,-54)*sub23);
 addtext(s = "LUGS", a = (101, -67));
 
 // ? filling references

@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.5)  6 APR 2023 09:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.11.6)  29 NOV 2023 20:33
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/ramak/Dropbox/Convex/speech/speech.tex
-(c:/Users/ramak/Dropbox/Convex/speech/speech.tex
+**speech.tex
+(./speech.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-03-30> (c:/texlive/2023/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2023-02-22>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
-(c:/texlive/2023/texmf-dist/tex/latex/base/size12.clo
+(/usr/share/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
@@ -22,23 +22,31 @@ File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
-) (c:/texlive/2023/texmf-dist/tex/latex/tex-gyre/tgschola.sty
+)
+(/usr/share/texmf-dist/tex/latex/tex-gyre/tgschola.sty
 Package: tgschola 2009/09/27 v1.2 TeX Gyre Schola as default roman family
- (c:/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
- (c:/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
-) (c:/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+)
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-) (c:/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+)
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )))
-LaTeX Font Info:    Trying to load font information for OT1+qcs on input line 7.
- (c:/texlive/2023/texmf-dist/tex/latex/tex-gyre/ot1qcs.fd
+LaTeX Font Info:    Trying to load font information for OT1+qcs on input line 7
+.
+
+(/usr/share/texmf-dist/tex/latex/tex-gyre/ot1qcs.fd
 File: ot1qcs.fd 2009/09/25 v1.2 font definition file for OT1/qcs
-) (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
+)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count193
 \l__pdf_internal_box=\box51
 ) (./speech.aux)
@@ -60,7 +68,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
 
 Overfull \hbox (18.16716pt too wide) in paragraph at lines 11--12
-[]\OT1/qcs/m/n/12 Good af-ter-noon, ladies and gen-tle-men, my name is Ro-man Mak-si-movich
+[]\OT1/qcs/m/n/12 Good af-ter-noon, ladies and gen-tle-men, my name is Ro-man M
+ak-si-movich
  []
 
 
@@ -70,7 +79,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--12
 
 
 Overfull \hbox (2.58708pt too wide) in paragraph at lines 13--14
-\OT1/qcs/m/n/12 fields of math-e-mat-ics, such as ge-om-e-try or func-tional anal-y-sis. How-ever,
+\OT1/qcs/m/n/12 fields of math-e-mat-ics, such as ge-om-e-try or func-tional an
+al-y-sis. How-ever,
  []
 
 
@@ -95,7 +105,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--20
 
 [1
 
-{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc}]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
+/enc/dvips/tex-gyre/q-rm.enc}]
 Underfull \hbox (badness 10000) in paragraph at lines 23--24
 
  []
@@ -113,12 +124,15 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 29.
 
 Overfull \hbox (19.99184pt too wide) in paragraph at lines 29--30
-\OT1/qcs/m/n/12 is lin-ear. But what's im-por-tant is that \OT1/qcs/m/it/12 this idea \OT1/qcs/m/n/12 can be nat-u-rally gen-er-al-ized
+\OT1/qcs/m/n/12 is lin-ear. But what's im-por-tant is that \OT1/qcs/m/it/12 thi
+s idea \OT1/qcs/m/n/12 can be nat-u-rally gen-er-al-ized
  []
 
 
 Overfull \hbox (8.89676pt too wide) in paragraph at lines 29--30
-\OT1/qcs/m/n/12 spaces by any its $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 n \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 1)$\OT1/qcs/m/n/12 -dimensional sub-hy-per-plane. Affin-ity is a pow-er-ful
+\OT1/qcs/m/n/12 spaces by any its $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 n \OMS/cms
+y/m/n/12 ^^@ \OT1/cmr/m/n/12 1)$\OT1/qcs/m/n/12 -dimensional sub-hy-per-plane. 
+Affin-ity is a pow-er-ful
  []
 
 
@@ -128,7 +142,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
 
 Overfull \hbox (19.08719pt too wide) in paragraph at lines 31--32
-\OT1/qcs/m/n/12 we can con-struct the seg-ment be-tween two points, and then de-fine con-vex-ity
+\OT1/qcs/m/n/12 we can con-struct the seg-ment be-tween two points, and then de
+-fine con-vex-ity
  []
 
 
@@ -143,17 +158,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--36
 
 
 Overfull \hbox (2.12088pt too wide) in paragraph at lines 37--38
-[]\OT1/qcs/m/n/12 Now we make a step aside to con-sider \OT1/qcs/m/it/12 uniquely geodesic met-ric spaces\OT1/qcs/m/n/12 ,
+[]\OT1/qcs/m/n/12 Now we make a step aside to con-sider \OT1/qcs/m/it/12 unique
+ly geodesic met-ric spaces\OT1/qcs/m/n/12 ,
  []
 
 
 Overfull \hbox (10.8479pt too wide) in paragraph at lines 37--38
-\OT1/qcs/m/n/12 in which ev-ery pair of points is con-nected by a unique distance-minimizing
+\OT1/qcs/m/n/12 in which ev-ery pair of points is con-nected by a unique distan
+ce-minimizing
  []
 
 
 Overfull \hbox (5.32558pt too wide) in paragraph at lines 37--38
-\OT1/qcs/m/n/12 con-nect-ing the points, and, what's more, ev-ery seg-ment is a free poly-tope. 
+\OT1/qcs/m/n/12 con-nect-ing the points, and, what's more, ev-ery seg-ment is a
+ free poly-tope. 
  []
 
 
@@ -163,7 +181,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--38
 
 
 Overfull \hbox (11.34871pt too wide) in paragraph at lines 40--41
-[]\OT1/qcs/m/n/12 The Poly-tope In-ter-sec-tion Lemma ba-si-cally states that the in-ter-sec-tion
+[]\OT1/qcs/m/n/12 The Poly-tope In-ter-sec-tion Lemma ba-si-cally states that t
+he in-ter-sec-tion
  []
 
 
@@ -173,7 +192,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--41
 
 
 Overfull \hbox (8.69519pt too wide) in paragraph at lines 42--43
-\OT1/qcs/m/n/12 space may not be con-vex, but each point must have a con-vex neigh-bor-hood.
+\OT1/qcs/m/n/12 space may not be con-vex, but each point must have a con-vex ne
+igh-bor-hood.
  []
 
 
@@ -188,12 +208,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--45
 
 [3]
 Overfull \hbox (15.0638pt too wide) in paragraph at lines 48--49
-[]\OT1/qcs/m/n/12 Finally, we come to Rie-man-nian ge-om-e-try. Ev-ery Rie-man-nian man-i-fold
+[]\OT1/qcs/m/n/12 Finally, we come to Rie-man-nian ge-om-e-try. Ev-ery Rie-man-
+nian man-i-fold
  []
 
 
 Overfull \hbox (5.03513pt too wide) in paragraph at lines 48--49
-\OT1/qcs/m/n/12 met-ric and topol-ogy, both of which are es-sen-tial to Rie-man-nian ge-om-e-try.
+\OT1/qcs/m/n/12 met-ric and topol-ogy, both of which are es-sen-tial to Rie-man
+-nian ge-om-e-try.
  []
 
 
@@ -203,12 +225,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--49
 
 
 Overfull \hbox (16.9031pt too wide) in paragraph at lines 50--51
-\OT1/qcs/m/n/12 branches, each giv-ing a some-what dif-fer-ent ap-proach to study-ing con-vex-ity.
- []
-
-
-Overfull \hbox (11.34712pt too wide) in paragraph at lines 50--51
-\OT1/qcs/m/n/12 In in-ter-nal the-ory we study the ab-stract prop-er-ties, in in-duc-ing struc-tures
+\OT1/qcs/m/n/12 branches, each giv-ing a some-what dif-fer-ent ap-proach to stu
+dy-ing con-vex-ity.
  []
 
 
@@ -218,15 +236,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
 [4] (./speech.aux) ) 
 Here is how much of TeX's memory you used:
- 908 strings out of 476696
- 16972 string characters out of 5809848
- 1857660 words of memory out of 5000000
- 21239 multiletter control sequences out of 15000+600000
+ 910 strings out of 477459
+ 16815 string characters out of 5832156
+ 1857388 words of memory out of 5000000
+ 21170 multiletter control sequences out of 15000+600000
  521101 words of font info for 43 fonts, out of 8000000 for 9000
- 833 hyphenation exceptions out of 8191
- 57i,5n,62p,1016b,107s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qcsr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qcsri.pfb>
-Output written on speech.pdf (4 pages, 85969 bytes).
+ 430 hyphenation exceptions out of 8191
+ 57i,5n,62p,979b,107s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+2.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/
+fonts/type1/public/tex-gyre/qcsr.pfb></usr/share/texmf-dist/fonts/type1/public/
+tex-gyre/qcsri.pfb>
+Output written on speech.pdf (4 pages, 86066 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  26 compressed objects within 1 object stream

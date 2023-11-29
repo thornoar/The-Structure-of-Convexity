@@ -1,5 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1701286439 "abstract.tex" "abstract.pdf" "abstract" 1701286440 0
+["pdflatex"] 1701284599 "abstract.tex" "abstract.pdf" "abstract" 1701284600 0
+  ".aux/abstract.aux" 1701284600 624 8718c25d6b732b01970ebbe014d5ec3a "pdflatex"
   "/home/ramak/projects/texlibs/Graphics.tex" 1700080085 594 c926ead8c5f949a4b468256d6360e479 ""
   "/home/ramak/projects/texlibs/Math.tex" 1694118089 9339 60aea893450bb93c30d10f349945745d ""
   "/home/ramak/projects/texlibs/Text.tex" 1699713183 1492 24075e6e3cfd38a44af575751c019cd2 ""
@@ -225,10 +226,9 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1689853683 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1699297163 4481225 3b9b4f75ed13b12e238c6f1efae948ab ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1699297152 6844086 df0585074ff7cbb46de2c45e618e46ef ""
-  "abstract.aux" 1701286440 624 8718c25d6b732b01970ebbe014d5ec3a "pdflatex"
   "abstract.tex" 1701284598 4806 5fd30dada559320f915c9a75414cf151 ""
   (generated)
-  "abstract.aux"
-  "abstract.log"
+  ".aux/abstract.aux"
+  ".aux/abstract.log"
   "abstract.pdf"
   (rewritten before read)

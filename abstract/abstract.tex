@@ -1,6 +1,6 @@
 \documentclass[conference]{IEEEtran}
 
-\newcommand{\lib}[1]{\input{../../Libs/LaTeX/#1}}
+\input{preamble}
 
 \newcommand{\C}{\EuScript{C}}
 \newcommand{\E}{\EuScript{E}}
@@ -11,29 +11,15 @@
 \newcommand{\ins}{\varpropto}
 \newcommand{\g}{\mathfrak{g}}
 
-\lib{Asymptote/Asymptote}
-\lib{Graphics}
-% \lib{Text}
-\lib{Math}
-\lib{Theorem_eng}
+\input{Theorem_eng}
 
-\usepackage{cite}
-:\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
-\usepackage{algorithm}
-\usepackage{graphicx}
-\usepackage{textcomp}
-\usepackage{xcolor}
-\usepackage{url}
+% \usepackage{algorithmic}
+% \usepackage{algorithm}
 \usepackage{flushend}
-\usepackage[left = 3cm, right  =3cm, top = 4cm, bottom = 2cm, bindingoffset = 0cm]{geometry}
-%\usepackage{fontawesome}
-%\usepackage{mdframed}
-%\usepackage{soul}
-%\usepackage[ampersand]{easylist}
-%\usepackage{hyperref}
+\geometry{left = 3cm, right  =3cm, top = 4cm, bottom = 2cm, bindingoffset = 0cm}
 
 \begin{document}
+
 \title{The Structure of Convexity} 
 \date{}%date stay empty
 

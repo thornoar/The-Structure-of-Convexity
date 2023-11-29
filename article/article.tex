@@ -7,7 +7,10 @@
 \let\ps@plain\ps@empty
 \makeatletter
 
-\newcommand{\lib}[1]{\input{../../Libs/LaTeX/#1}}
+\input{preamble}
+
+\usepackage{asymptote}
+\def\asydir{./asy}
 
 \newcommand{\C}{\EuScript{C}}
 \newcommand{\E}{\EuScript{E}}
@@ -18,15 +21,12 @@
 \newcommand{\ins}{\varpropto}
 \newcommand{\g}{\mathfrak{g}}
 
-\lib{Asymptote/Asymptote}
-\lib{Graphics}
-\lib{Text}
-\lib{Math}
-\lib{Theorem_eng}
+\input{Theorem_eng}
 
 \usepackage{tgschola}
 
 \begin{asydef}
+///<
 defaultpen(linewidth(.9pt));
 
 picture part;
@@ -55,10 +55,11 @@ label(part, "\(c\)", a[5], 2*S);
 
 void drawsegment (pair a, pair b, pen drawpen = currentpen)
 {
-    draw(a--b, drawpen);
-    dot(a, dotpen);
-    dot(b, dotpen);
+	draw(a--b, drawpen);
+	dot(a, dotpen);
+	dot(b, dotpen);
 }
+///>
 \end{asydef}
 
 \newcommand{\varlle}{\lesssim}
@@ -72,9 +73,7 @@ void drawsegment (pair a, pair b, pen drawpen = currentpen)
 \emptysymbol\\[3cm]
 {\Huge \bf Convex structures}\\[2mm]
 {\Huge \bf and their applications}\\[1mm]
-\rule[0.5ex]{\widthof{{\Huge \bf and their applications}} + 1cm}{1.5pt}\\ 
-
-
+\rule[0.5ex]{\widthof{{\Huge \bf and their applications}} + 1cm}{1.5pt}\\
 
 \begin{wrapfigure}[10]{r}{.5\linewidth}
 \begin{flushleft}
@@ -82,6 +81,7 @@ void drawsegment (pair a, pair b, pen drawpen = currentpen)
 \vspace{8mm}
 
 \begin{asy}
+///<
 settings.render = 0;
 // settings.outformat = "png";
 
@@ -96,7 +96,7 @@ surface frontHemisphere = surface(myarc, angle1 = 180, angle2 = 360, c = O, axis
 draw(backHemisphere, surfacepen = material(white+opacity(0.8), emissivepen=0.1*white), meshpen=gray(0.4));
 draw(frontHemisphere, surfacepen=material(white+opacity(0.8),
 emissivepen=0.1*white), meshpen=gray(0.4));
-
+///>
 \end{asy}
 \end{flushleft}
 \end{wrapfigure}
@@ -198,6 +198,7 @@ The author expresses exceptional gratitude to sir Arshar Aivasian, student of th
 \vspace{-2mm}
 
 \begin{asy}
+///<
 size(7cm);
 
 path convex = (-1,0)..(0,2)..(1,0)..(0,-1)..cycle;
@@ -214,6 +215,7 @@ label("convex", (-1, -1.6));
 drawsegment((2.5, -.7), (3.1, .9), drawpen = currentpen+red);
 
 label("not convex", (2, -1.6));
+///>
 \end{asy}
 
 % \vspace{1cm}
@@ -238,7 +240,6 @@ In a vector space, by convex sets we typically understand those that with every 
 \begin{definition}[Convex hull]
     Let \(X\) be a convex space. For a subset \(A \subset X\) its \textit{convex hull} \(\tp{A}\) is defined to be the intersection of all convex sets that contain \(A\): \[\tp{A} = \bigcap\limits_{\substack{B \in \C \\ B \supset A}} B.\] \(A \subset X\) is convex if and only if it is equal to its convex hull.
 \end{definition}
-
 
 \begin{definition}[\(\catname{Betweenness}\)]\label{def-btw}
     A set \(X\) equipped with a binary relation \(\btw \hbox{ (``between'') } \subset X \times 2^X_{\rm fin}\), where \(2^X_{\rm fin}\) denotes the set of all finite subsets of \(X\), is called a \textit{betweenness space} if
@@ -273,44 +274,46 @@ The proof is provided in the subsection \ref{ap-th-equivalent}.
 
     \begin{center}
     \begin{asy}
-        size(8cm);
+    ///<
+    size(8cm);
 
-        draw((-.05,0)--(1,0), arrow = ArcArrow(SimpleHead));
-        draw((0,-.05)--(0,1), arrow = ArcArrow(SimpleHead));
+    draw((-.05,0)--(1,0), arrow = ArcArrow(SimpleHead));
+    draw((0,-.05)--(0,1), arrow = ArcArrow(SimpleHead));
 
-        pair v1 = (.7,.4);
-        pair v2 = (.7,1.1);
-        pair v3 = (1.8,1.1);
-        pair v4 = (1.8,.4);
+    pair v1 = (.7,.4);
+    pair v2 = (.7,1.1);
+    pair v3 = (1.8,1.1);
+    pair v4 = (1.8,.4);
 
-        real nudge = .1;
-        pair vnudge = (0, nudge);
-        pair hnudge = (nudge, 0);
+    real nudge = .1;
+    pair vnudge = (0, nudge);
+    pair hnudge = (nudge, 0);
 
-        draw(v1-vnudge--v1, dashed);
-        draw(v2+vnudge--v2, dashed);
-        draw(v2-hnudge--v2, dashed);
-        draw(v3+hnudge--v3, dashed);
-        draw(v3+vnudge--v3, dashed);
-        draw(v4-vnudge--v4, dashed);
-        draw(v4+hnudge--v4, dashed);
-        draw(v1-hnudge--v1, dashed);
+    draw(v1-vnudge--v1, dashed);
+    draw(v2+vnudge--v2, dashed);
+    draw(v2-hnudge--v2, dashed);
+    draw(v3+hnudge--v3, dashed);
+    draw(v3+vnudge--v3, dashed);
+    draw(v4-vnudge--v4, dashed);
+    draw(v4+hnudge--v4, dashed);
+    draw(v1-hnudge--v1, dashed);
 
-        filldraw(v1--v2--v3--v4--cycle, drawpen = blue+.8, fillpen = blue+opacity(.1));
+    filldraw(v1--v2--v3--v4--cycle, drawpen = blue+.8, fillpen = blue+opacity(.1));
 
-        dot(v1);
-        dot(v2);
-        dot(v3);
-        dot(v4, linewidth(4pt));
+    dot(v1);
+    dot(v2);
+    dot(v3);
+    dot(v4, linewidth(4pt));
 
-        real rad = .02;
+    real rad = .02;
 
-        filldraw(circle(v1, rad), fillpen = red);
-        filldraw(circle(v3, rad), fillpen = red);
+    filldraw(circle(v1, rad), fillpen = red);
+    filldraw(circle(v3, rad), fillpen = red);
 
-        filldraw(circle(v2, rad), fillpen = green);
-        filldraw(circle((v1+v4)/2, rad), fillpen = green);
-        filldraw(circle((v3+v4)/2, rad), fillpen = green);
+    filldraw(circle(v2, rad), fillpen = green);
+    filldraw(circle((v1+v4)/2, rad), fillpen = green);
+    filldraw(circle((v3+v4)/2, rad), fillpen = green);
+    ///>
     \end{asy}
     \end{center}
     
@@ -350,12 +353,8 @@ Note that the equivalence of \(\catname{Convex}\) and \(\catname{Betweenness}\) 
 \end{proposition}
 
 \begin{proof}
-    Obvious.
+	Obvious.
 \end{proof}
-
-% \begin{proof}
-%     The first two statements are trivial, so we will confine ourselves to proving the third one. Consider two polytopes, \(P_1\) and \(P_2\). The inequality \[\max (\dim{P_1}, \dim{P_2}) \lle \dim{\tp{P_1, P_2}}\] follows from statement (2). Now, assume that \(\dim P_1 = m\) amd \(\dim P_2 = l\). Let \(\{F_i^1\}_{i = 1}^{k}\) and \(\{F_j^2\}_{j = 1}^{s}\) be families of finite sets of cardinality \(\lle m+1\) and \(\lle l+1\) respectively such that \[P_1 \subset \bigcup\limits_{i = 1}^k \tp{F^1_i} \ \mbox{  and  } \ P_2 \subset \bigcup\limits_{j = 1}^s \tp{F^2_j}\] Consider the finite family of sets \(G_{i, j} = F^1_i \cup F^2_j\). Each of them has 
-% \end{proof}
 
 \begin{corollary}
     It follows from statement (1) that every polytope has a dimension. If a polytope \(P\) satisfies the equality \(\dim P = \bas P - 1\), then \(P\) is called a \textit{simplex}.
@@ -417,7 +416,7 @@ Note that the equivalence of \(\catname{Convex}\) and \(\catname{Betweenness}\) 
 
     Now, we verify (2). Note that \(\tp{\A}\) has a dimension by proposition \ref{set-dim}, as a convex set. Consider a point \(x \in \tp{\A}\). It is contained in some \(m\)-dimensional polytope \(P \in \A\), and so \(\eta_x \gge m\). Now, take any polytope \(Q\) such that \(x \in Q \subset \tp{A}\). By the previous statement we see that there is a polytope \(R \in \A\) such that \(Q \subset R\), and so \(\dim Q \lle \dim R = m\). Therefore, \(\eta_x \lle m\), and we conclude that \(\eta_x = m\).\\
 
-    Lastly, consider a point \(x \in X\). The family \[\B = \{\tp{\bas P \cup \{x\}} \mid P \in \A\} \cup \A\] is a hyperfamily, and \(\A \subset \B\), hence \(\A = \B\). Since \(x \in \tp{\B}\), we have \(x \in \tp{\A}\), and so \(X = \tp{\A}\).
+Lastly, consider a point \(x \in X\). The family \[\B = \{\tp{\bas P \cup \{x\}} \mid P \in \A\} \cup \A\] is a hyperfamily, and \(\A \subset \B\), hence \(\A = \B\). Since \(x \in \tp{\B}\), we have \(x \in \tp{\A}\), and so \(X = \tp{\A}\).
 \end{proof}
 
 \begin{theorem}\label{th-hyper-unique}
@@ -435,6 +434,7 @@ This lemma cannot be easily proven. Moreover, generally speaking, it is not even
 
 \begin{center}
 \begin{asy}
+///<
 size(13cm);
 
 add(part);
@@ -446,7 +446,7 @@ draw(a[2]--a[1], arrow = MidArcArrow(SimpleHead));
 dot(a[1], dotpen);
 dot(a[3], dotpen);
 dot(a[5], dotpen);
-
+///>
 \end{asy}
 \end{center}
 
@@ -454,6 +454,7 @@ The betweenness relation \[z \btw F \equ \mbox{there are } x, y \in F \mbox{ suc
 
 \begin{center}
 \begin{asy}[width = \textwidth]
+///<
 
 picture p, q, pq;
 
@@ -472,7 +473,6 @@ label(p, "\(\dim P = 1\)", (0, -1.3));
 
 add(shift(-6,0)*p);
 
-
 draw(q, a[3]{W}..{W}a[2], arrow = MidArcArrow(SimpleHead));
 dot(q, a[1], polytopedotpen+blue);
 dot(q, a[5], polytopedotpen+blue);
@@ -484,7 +484,6 @@ label(q, "\(\dim Q = 1\)", (0, -1.3));
 
 add(q);
 
-
 dot(pq, a[1], polytopedotpen+deepgreen);
 dot(pq, a[3], polytopedotpen+deepgreen);
 dot(pq, a[5], polytopedotpen+deepgreen);
@@ -492,9 +491,10 @@ draw(pq, a[5]{W}..{W}a[2], p = polytopepen+deepgreen, arrow = MidArcArrow(Simple
 draw(pq, a[3]{W}..{W}a[2], p = polytopepen+deepgreen, arrow = MidArcArrow(SimpleHead));
 draw(pq, a[2]--a[1], p = polytopepen+deepgreen, arrow = MidArcArrow(SimpleHead));
 
-label(pq, "\(\dim \tp{P, Q} = 2\)", (0, -1.3));
+label(pq, "\(\dim \langle {P, Q} \rangle = 2\)", (0, -1.3));
 
 add(shift(6,0)*pq);
+///>
 \end{asy}
 \end{center}
 
@@ -530,11 +530,6 @@ Lemma \ref{tpul} does, however, relate strongly to properties of hyperplanes. Co
 \begin{remark}
     Observe that if a convex space is free, its extension is also free. Additionally, in a one-point extension, as in any zero-dimensional space, the Polytope Union Lemma holds.
 \end{remark}
-
-
-
-
-
 
 
 \section{Where does it come from?}
@@ -573,7 +568,6 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
 \begin{proof}~
     \begin{enumerate}
         \item It is obvious that, due to linearity, every triple of points in \(X\) is convex-dependent. Therefore, the dimension of any polytope is at most one.
-        %Now, according to observation \ref{ord-singl-obs} each non-singleton polytope is exactly one-dimensional. Finally, since \(|X| > 1\), each point in \(X\) is contained in a one-dimensional polytope, which means that \(\dim X = 1\).
         
         \item Suppose a linear order \(\varlle\) gives the same convexity on \(X\). Consider two distinct points \(a, b \in X\) and assume without loss of generality that \(a \lle b\) and \(a \varlle b\). We will show that \(\lle\) and \(\varlle\) are the same order. Take another two points \(x, y \in X\) such that \(x \lle y\). Without loss of generality we can say that \(a \lle b \lle x \lle y\) (in case of a different relative positioning the proof proceeds analogically). Thus, first, \(b\) lies between \(a\) and \(x\). It means that either \(a \varlle b \varlle x\) or \(x \varlle b \varlle a\). Since \(a \varlle b\), the second option it out of consideration, and we have \(b \varlle x\). Now, second, \(x\) lies between \(b\) and \(y\). Since \(b \varlle x\), we similarly conclude that \(x \varlle y\).
         
@@ -612,22 +606,6 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
     That is, \(L\) divides \(H\) into two \textit{half-spaces}.
 \end{definition}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Metric convexity and segmentiality}
 \label{mcs}
 
@@ -635,43 +613,46 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
     Let \((M, d)\) be a metric space. For points \(a, b \in M\) define the \textit{metric segment} \([a, b]\) to be the set of all points \(x \in M\) such that \[d(a, x) + d(x, b) = d(a,b).\] We call a set \(A \subset M\) \textit{convex} if for each pair of points \(a, b \in A\) the segment \([a, b]\) is contained in \(A\). The resulting convexity is called \textit{metric}.
 \end{definition}
 
+
 \begin{remark}
     Note that a segment may not be a convex set. Consider the set \(\{a, b, x, y, z\}\) with the following metric:
 
     \begin{center}
-        \begin{asy}
-            size(10cm, 6cm);
+    \begin{asy}
+    ///<
+    size(10cm, 6cm);
 
-            pair a = (-2, 5), b = (-1, -3), x = (-4, 0), y = (4, 1.5), z = (0, 2);
+    pair a = (-2, 5), b = (-1, -3), x = (-4, 0), y = (4, 1.5), z = (0, 2);
 
-            label(a, "\(a\)", align = 1.1*N);
-            label(b, "\(b\)", align = S);
-            label(x, "\(x\)", align = W);
-            label(y, "\(y\)", align = E);
-            label(z, "\(z\)", align = .9*E+N);
+    label(a, "\(a\)", align = 1.1*N);
+    label(b, "\(b\)", align = S);
+    label(x, "\(x\)", align = W);
+    label(y, "\(y\)", align = E);
+    label(z, "\(z\)", align = .9*E+N);
 
-            drawsegment(a, y);
-            drawsegment(y, b);
-            drawsegment(x, b);
-            drawsegment(a, x);
-            drawsegment(a, b);
-            drawsegment(a, z);
-            drawsegment(z, b);
-            drawsegment(x, z);
-            drawsegment(z, y);
-            drawsegment(x, y);
+    drawsegment(a, y);
+    drawsegment(y, b);
+    drawsegment(x, b);
+    drawsegment(a, x);
+    drawsegment(a, b);
+    drawsegment(a, z);
+    drawsegment(z, b);
+    drawsegment(x, z);
+    drawsegment(z, y);
+    drawsegment(x, y);
 
-            label("\(1\)", a--x, align = (0,0), filltype = Fill(white));
-            label("\(1\)", a--y, align = (0,0), filltype = Fill(white));
-            label("\(1\)", x--b, align = (0,0), filltype = Fill(white));
-            label("\(1\)", y--b, align = (0,0), filltype = Fill(white));
-            label("\(2\)", a--z, align = (0,0), filltype = Fill(white));
-            label(Label("\(2\)", position = Relative(.25)), a--b, align = (0,0), filltype = Fill(white));
-            label("\(2\)", z--b, align = (0,0), filltype = Fill(white));
-            label(Label("\(2\)", position = Relative(.67)), x--y, align = (0,0), filltype = Fill(white));
-            label(Label("\(1\)", position = Relative(.35)), x--z, align = (0,0), filltype = Fill(white));
-            label("\(1\)", z--y, align = (0,0), filltype = Fill(white));
-        \end{asy}
+    label("\(1\)", a--x, align = (0,0), filltype = Fill(white));
+    label("\(1\)", a--y, align = (0,0), filltype = Fill(white));
+    label("\(1\)", x--b, align = (0,0), filltype = Fill(white));
+    label("\(1\)", y--b, align = (0,0), filltype = Fill(white));
+    label("\(2\)", a--z, align = (0,0), filltype = Fill(white));
+    label(Label("\(2\)", position = Relative(.25)), a--b, align = (0,0), filltype = Fill(white));
+    label("\(2\)", z--b, align = (0,0), filltype = Fill(white));
+    label(Label("\(2\)", position = Relative(.67)), x--y, align = (0,0), filltype = Fill(white));
+    label(Label("\(1\)", position = Relative(.35)), x--z, align = (0,0), filltype = Fill(white));
+    label("\(1\)", z--y, align = (0,0), filltype = Fill(white));
+    ///>
+    \end{asy}
     \end{center}
 
     We see that \([a, b] = \{a, x, y, b\}\), and \([x, y] = \{x, z, y\} \not\subset [a, b]\), hence \([a, b]\) is not convex.
@@ -723,8 +704,6 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
     Finally, we prove that \(P\) is free. Let \(H\) be another basis of \(P\). For every \(f \in F\) we have \(f \btw H \ \Rightarrow \ f \in H\), and thus \(F \subset H\). Similarly, \(H \subset F\), and so \(F = H\), which concludes the proof.
 \end{proof}
 
-
-
 \begin{definition}\label{def-unigeo}
     Let \((M, d)\) be a metric space. A continuous (with respect to the standard metric topology) injection \(f \colon [0, 1] \to M\) is called a \textit{path} in \(M\). We consider two paths equal if their beginnings and endings match, and they produce the same image. Furthermore, we may consider any continuous injection \(f \colon [\alpha, \beta] \to M\) to be a path, as \([\alpha, \beta]\) is naturally isomorphic to \([0,1]\). The \textit{length} of a path is defined to be the upper bound of lengths of all polygonal chains approximating it: \[l(f) = \sup \left\{\sum_{k = 0}^{n-1} d(f(x_k), f(x_{k+1})) \mid x_k \in [0,1], \ x_k < x_{k+1}\right\}\] The space \(M\) will be called a \textit{length space} if
 
@@ -774,24 +753,6 @@ Convexity is commonly studied in the context of vector spaces, with the linear s
     Let \(M\) be uniquely geodesic and suppose that \(a, b, c, d \in M\) are such that \([a, b] = [c, d]\). Let \(f = \g(a, b)\). Without loss of generality, we may assume that \(f^{-1}(c)\) is less than \(f^{-1}(d)\). Therefore, for the paths \(f_1 = \g(a, c)\), \(f_2 = \g(c, d)\), and \(f_3 = \g(d, b)\) we have \(f = f_1 + f_2 + f_3\), and so \[l(f) = l(f_1) + l(f_2) + l(f_3).\] At the same time, \[\im{f} = [a, b] = [c, d] = \im{f_2},\] ergo \(l(f) = l(f_2)\). Consequently, \[d(a, c) = l(f_1) = 0 \implic a = c,\] \[d(b, d) = l(f_3) = 0 \implic b = d.\] 
 \end{proof}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section{Convex geometry}
 
 In this section we will study the applications of convexity in the context of differential and Riemannian geometry. We will start by inducing a topology on convex spaces, satisfying the following conditions:
@@ -820,7 +781,7 @@ This statement is also not generally true. Consider the set of natural numbers \
 
 \begin{center}
 \begin{asy}[width = \textwidth]
-
+///<
 pair[] b = new pair[6];
 
 for (int i = 0; i < b.length; ++i) {b[i] = (i, 0);}
@@ -846,8 +807,7 @@ dot("\(\infty_2\)", align = 1.5*E, (b.length+.5, -.5));
 
 draw((b.length+.5, .5) -- (b.length-.5, 0), arrow = MidArcArrow(SimpleHead), margin = Margin(begin = 0, end = 5));
 draw((b.length+.5, -.5) -- (b.length-.5, 0), arrow = MidArcArrow(SimpleHead), margin = Margin(begin = 0, end = 5));
-
-// drawWFunction(l = new string[]{"1", "2"}, mode = -1);
+///>
 \end{asy}
 \end{center}
 
@@ -856,8 +816,6 @@ We can see that the space \(X'\) satisfies conditions \textbf{(CT-1)} -- \textbf
 \begin{definition}\label{def-conv-top}
     The Polytope Intersection Lemma ensures that the family of convex interiors of all polytopes is a \textit{base of a topology}. For this reason, we will include it in the list of assumed conditions as \textbf{(CT-4)}. Now, a convex set \(X\) satisfying \textbf{(CT-1)} -- \textbf{(CT-4)} can be equipped with a topology generated by the base \[\B = \{\ConvInt{P} \mid P \mbox{ is a polytope in } X\}.\]
 \end{definition}
-
-
 
 \begin{definition}
     A set \(X\) with a family \(\Le\) of its subsets is called a \textit{locally convex space} if
@@ -890,12 +848,9 @@ The open two-dimensional disk \(B^2\) is \textbf{not} isomorphic to the Eucledia
 \end{observation}
 
 
-
 \section{Conclusion}
 
-In this work we have examined convex spaces from different angles, considering their internal properties, the structures that induce convexity, and the structures convexity induces itself. The last area provides wide prospects for further research, as the idea of convexity is deeply incorporated in the theory of Riemannian manifolds.
-
-
+In this paper we have examined convex spaces from different angles, considering their internal properties, the structures that induce convexity, and the structures convexity induces itself. The last area provides wide prospects for further research, as the idea of convexity is deeply incorporated in the theory of Riemannian manifolds.
 
 
 \begin{thebibliography}{99}
@@ -903,12 +858,8 @@ In this work we have examined convex spaces from different angles, considering t
 
     \bibitem{book2} David C. Kay, Eugine W. Womble, \textit{AXIOMATIC CONVEXITY THEORY AND RELATIONSHIPS BETWEEN THE CARATH\'EODORY, HELLY, AND RADON NUMBERS}, Pacific Journal of Mathematics, 1971;
 
-    \bibitem{book3} John M. Lee, \textit{Introduction to Riemannian Manifolds}, Department of Mathematics, University of Washington, Seattle, WA, USA, 2018. %D. Gromoll, W. Klingenberg and W. Meyer, \textit{``Riemannsche Geometrie im Grossen''}, Springer-Verlag, Berlin, 1968.
+    \bibitem{book3} John M. Lee, \textit{Introduction to Riemannian Manifolds}, Department of Mathematics, University of Washington, Seattle, WA, USA, 2018.
 \end{thebibliography}
-
-
-
-
 
 \section{Appendix}
 
