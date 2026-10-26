@@ -37,9 +37,9 @@ label(part, "\(c\)", a[5], 2*S);
 
 void drawsegment (pair a, pair b, pen drawpen = currentpen)
 {
-draw(a--b, drawpen);
-dot(a, dotpen);
-dot(b, dotpen);
+	draw(a--b, drawpen);
+	dot(a, dotpen);
+	dot(b, dotpen);
 }
 ///>
 
